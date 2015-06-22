@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
 
-namespace SinglePageApp.Areas.HelpPage.Models
+namespace GeoBase.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

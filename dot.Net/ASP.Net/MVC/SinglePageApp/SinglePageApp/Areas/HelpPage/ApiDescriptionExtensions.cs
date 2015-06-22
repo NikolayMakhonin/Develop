@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace SinglePageApp.Areas.HelpPage
+namespace GeoBase.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

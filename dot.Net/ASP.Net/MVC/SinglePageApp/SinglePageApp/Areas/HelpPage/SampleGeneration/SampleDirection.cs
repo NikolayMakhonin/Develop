@@ -1,4 +1,4 @@
-namespace SinglePageApp.Areas.HelpPage
+namespace GeoBase.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace SinglePageApp.Results
+namespace GeoBase.Results
 {
     public class ChallengeResult : IHttpActionResult
     {

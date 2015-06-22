@@ -7,9 +7,9 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using SinglePageApp.Areas.HelpPage.Models;
+using GeoBase.Areas.HelpPage.Models;
 
-namespace SinglePageApp.Areas.HelpPage
+namespace GeoBase.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

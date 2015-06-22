@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SinglePageApp.Models
+namespace GeoBase.Models
 {
     // Модели, возвращаемые действиями AccountController.
 

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется следующим образом
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных с этой сборкой.
-[assembly: AssemblyTitle("SinglePageApp.Tests")]
+[assembly: AssemblyTitle("GeoBase.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("UralSOFT")]
-[assembly: AssemblyProduct("SinglePageApp.Tests")]
+[assembly: AssemblyProduct("GeoBase.Tests")]
 [assembly: AssemblyCopyright("© UralSOFT, 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

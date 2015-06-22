@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace SinglePageApp.Models
+namespace GeoBase.Models
 {
     // Модели, используемые в качестве параметров действий AccountController.
 

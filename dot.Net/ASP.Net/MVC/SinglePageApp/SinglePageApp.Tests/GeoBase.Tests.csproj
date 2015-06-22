@@ -100,9 +100,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SinglePageApp\SinglePageApp.csproj">
+    <ProjectReference Include="..\SinglePageApp\GeoBase.csproj">
       <Project>{80CCB312-6FC4-49C1-B90E-F4DC2D77330A}</Project>
-      <Name>SinglePageApp</Name>
+      <Name>GeoBase</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -13,11 +13,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using SinglePageApp.Models;
-using SinglePageApp.Providers;
-using SinglePageApp.Results;
+using GeoBase.Models;
+using GeoBase.Providers;
+using GeoBase.Results;
 
-namespace SinglePageApp.Controllers
+namespace GeoBase.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]

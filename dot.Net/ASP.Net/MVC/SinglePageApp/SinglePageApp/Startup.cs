@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(SinglePageApp.Startup))]
+[assembly: OwinStartup(typeof(GeoBase.Startup))]
 
-namespace SinglePageApp
+namespace GeoBase
 {
     public partial class Startup
     {

@@ -7,9 +7,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using SinglePageApp.Providers;
+using GeoBase.Providers;
 
-namespace SinglePageApp
+namespace GeoBase
 {
     public partial class Startup
     {

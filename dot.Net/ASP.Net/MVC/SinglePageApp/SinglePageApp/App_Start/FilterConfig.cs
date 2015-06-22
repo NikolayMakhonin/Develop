@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace SinglePageApp
+namespace GeoBase
 {
     public class FilterConfig
     {

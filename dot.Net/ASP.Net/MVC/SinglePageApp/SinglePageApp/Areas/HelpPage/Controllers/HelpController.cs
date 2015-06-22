@@ -1,9 +1,9 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using SinglePageApp.Areas.HelpPage.Models;
+using GeoBase.Areas.HelpPage.Models;
 
-namespace SinglePageApp.Areas.HelpPage.Controllers
+namespace GeoBase.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.
