@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f669afe0f994642ab7af1839a948c25" Name="Diagram1" >
+        <EntityTypeShape EntityType="DesignModel.Comment" Width="1.5" PointX="4.25" PointY="1.625" />
+        <AssociationConnector Association="DesignModel.CommentChilds" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.5102097430159276" PointY="1.6249999999998968" />
+          <ConnectorPoint PointX="4.5102097430159276" PointY="1.0833333333333333" />
+          <ConnectorPoint PointX="5.4891952955549623" PointY="1.0833333333333333" />
+          <ConnectorPoint PointX="5.4891952955549623" PointY="1.6249999999998968" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="DesignModel.CommentRating" Width="1.625" PointX="1.5" PointY="1.625" />
+        <EntityTypeShape EntityType="DesignModel.GeoActual" Width="1.5" PointX="6.875" PointY="5.625" />
+        <EntityTypeShape EntityType="DesignModel.Geo" Width="1.5" PointX="4.25" PointY="5.625" />
+        <EntityTypeShape EntityType="DesignModel.GeoTag" Width="1.5" PointX="4.25" PointY="8.875" />
+        <EntityTypeShape EntityType="DesignModel.GeoRating" Width="1.5" PointX="1.5" PointY="5.625" />
+        <AssociationConnector Association="DesignModel.GeoComment" />
+        <AssociationConnector Association="DesignModel.GeoGeoActual" />
+        <AssociationConnector Association="DesignModel.GeoGeoRating" />
+        <AssociationConnector Association="DesignModel.GeoGeoTag" />
+        <AssociationConnector Association="DesignModel.CommentCommentRating" />
+        <EntityTypeShape EntityType="DesignModel.Language" Width="1.5" PointX="7" PointY="1.625" />
+        <AssociationConnector Association="DesignModel.LanguageComment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

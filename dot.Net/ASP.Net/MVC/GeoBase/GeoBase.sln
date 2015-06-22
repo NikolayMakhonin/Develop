@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoBase", "SinglePageApp\GeoBase.csproj", "{80CCB312-6FC4-49C1-B90E-F4DC2D77330A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoBase", "GeoBase\GeoBase.csproj", "{80CCB312-6FC4-49C1-B90E-F4DC2D77330A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoBase.Tests", "SinglePageApp.Tests\GeoBase.Tests.csproj", "{BC784E16-B29C-4B9D-86C2-B2CFF90F0631}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoBase.Tests", "GeoBase.Tests\GeoBase.Tests.csproj", "{BC784E16-B29C-4B9D-86C2-B2CFF90F0631}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{A32DDAC1-E98F-48E0-83A1-3A3CD3011726}"
 EndProject

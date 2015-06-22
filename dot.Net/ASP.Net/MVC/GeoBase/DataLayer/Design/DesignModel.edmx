@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DesignModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DesignModelStoreContainer">
+    <EntitySet Name="Comments" EntityType="DesignModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommentRatings" EntityType="DesignModel.Store.CommentRatings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeoActuals" EntityType="DesignModel.Store.GeoActuals" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Geos" EntityType="DesignModel.Store.Geos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeoTags" EntityType="DesignModel.Store.GeoTags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeoRatings" EntityType="DesignModel.Store.GeoRatings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Languages" EntityType="DesignModel.Store.Languages" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CommentChilds" Association="DesignModel.Store.CommentChilds">
+      <End Role="Parent" EntitySet="Comments" />
+      <End Role="Childs" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="GeoComment" Association="DesignModel.Store.GeoComment">
+      <End Role="Geo" EntitySet="Geos" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="GeoGeoActual" Association="DesignModel.Store.GeoGeoActual">
+      <End Role="Geo" EntitySet="Geos" />
+      <End Role="GeoActual" EntitySet="GeoActuals" />
+    </AssociationSet>
+    <AssociationSet Name="GeoGeoRating" Association="DesignModel.Store.GeoGeoRating">
+      <End Role="Geo" EntitySet="Geos" />
+      <End Role="GeoRating" EntitySet="GeoRatings" />
+    </AssociationSet>
+    <AssociationSet Name="GeoGeoTag" Association="DesignModel.Store.GeoGeoTag">
+      <End Role="Geo" EntitySet="Geos" />
+      <End Role="GeoTag" EntitySet="GeoTags" />
+    </AssociationSet>
+    <AssociationSet Name="CommentCommentRating" Association="DesignModel.Store.CommentCommentRating">
+      <End Role="Comment" EntitySet="Comments" />
+      <End Role="CommentRating" EntitySet="CommentRatings" />
+    </AssociationSet>
+    <AssociationSet Name="LanguageComment" Association="DesignModel.Store.LanguageComment">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="true" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="true" />
+    <Property Name="Title" Type="varchar" Nullable="true" MaxLength="256" />
+    <Property Name="Date" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Content" Type="varchar" Nullable="true" MaxLength="4096" />
+    <Property Name="Deleted" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Geo_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CommentRatings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommentId" Type="int" Nullable="false" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GeoActuals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GeoId" Type="int" Nullable="false" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Value" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Geos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="Date" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="GeoData" Type="geography" Nullable="false" SRID="4326" />
+  </EntityType>
+  <EntityType Name="GeoTags">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GeoId" Type="int" Nullable="false" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="GeoRatings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GeoId" Type="int" Nullable="false" />
+    <Property Name="OwnerId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nchar" Nullable="false" MaxLength="2" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CommentChilds">
+    <End Role="Parent" Type="DesignModel.Store.Comments" Multiplicity="*" />
+    <End Role="Childs" Type="DesignModel.Store.Comments" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Childs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parent">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GeoComment">
+    <End Role="Geo" Type="DesignModel.Store.Geos" Multiplicity="0..1" />
+    <End Role="Comment" Type="DesignModel.Store.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Geo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Geo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GeoGeoActual">
+    <End Role="Geo" Type="DesignModel.Store.Geos" Multiplicity="1" />
+    <End Role="GeoActual" Type="DesignModel.Store.GeoActuals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Geo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeoActual">
+        <PropertyRef Name="GeoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GeoGeoRating">
+    <End Role="Geo" Type="DesignModel.Store.Geos" Multiplicity="1" />
+    <End Role="GeoRating" Type="DesignModel.Store.GeoRatings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Geo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeoRating">
+        <PropertyRef Name="GeoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GeoGeoTag">
+    <End Role="Geo" Type="DesignModel.Store.Geos" Multiplicity="1" />
+    <End Role="GeoTag" Type="DesignModel.Store.GeoTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Geo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeoTag">
+        <PropertyRef Name="GeoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommentCommentRating">
+    <End Role="Comment" Type="DesignModel.Store.Comments" Multiplicity="1" />
+    <End Role="CommentRating" Type="DesignModel.Store.CommentRatings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CommentRating">
+        <PropertyRef Name="CommentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LanguageComment">
+    <End Role="Language" Type="DesignModel.Store.Languages" Multiplicity="0..1" />
+    <End Role="Comment" Type="DesignModel.Store.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DesignModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DesignModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="DesignModel.Comment" />
+          <AssociationSet Name="CommentChilds" Association="DesignModel.CommentChilds">
+            <End Role="Parent" EntitySet="Comments" />
+            <End Role="Childs" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="CommentRatings" EntityType="DesignModel.CommentRating" />
+          <EntitySet Name="GeoActuals" EntityType="DesignModel.GeoActual" />
+          <EntitySet Name="Geos" EntityType="DesignModel.Geo" />
+          <EntitySet Name="GeoTags" EntityType="DesignModel.GeoTag" />
+          <EntitySet Name="GeoRatings" EntityType="DesignModel.GeoRating" />
+          <AssociationSet Name="GeoComment" Association="DesignModel.GeoComment">
+            <End Role="Geo" EntitySet="Geos" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="GeoGeoActual" Association="DesignModel.GeoGeoActual">
+            <End Role="Geo" EntitySet="Geos" />
+            <End Role="GeoActual" EntitySet="GeoActuals" />
+          </AssociationSet>
+          <AssociationSet Name="GeoGeoRating" Association="DesignModel.GeoGeoRating">
+            <End Role="Geo" EntitySet="Geos" />
+            <End Role="GeoRating" EntitySet="GeoRatings" />
+          </AssociationSet>
+          <AssociationSet Name="GeoGeoTag" Association="DesignModel.GeoGeoTag">
+            <End Role="Geo" EntitySet="Geos" />
+            <End Role="GeoTag" EntitySet="GeoTags" />
+          </AssociationSet>
+          <AssociationSet Name="CommentCommentRating" Association="DesignModel.CommentCommentRating">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="CommentRating" EntitySet="CommentRatings" />
+          </AssociationSet>
+          <EntitySet Name="Languages" EntityType="DesignModel.Language" />
+          <AssociationSet Name="LanguageComment" Association="DesignModel.LanguageComment">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" Nullable="true" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="true" />
+          <Property Name="Title" Type="String" Unicode="false" MaxLength="256" Nullable="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Content" Type="String" Nullable="true" Unicode="false" MaxLength="4096" />
+          <NavigationProperty Name="Parent" Relationship="DesignModel.CommentChilds" FromRole="Parent" ToRole="Childs" />
+          <NavigationProperty Name="Childs" Relationship="DesignModel.CommentChilds" FromRole="Childs" ToRole="Parent" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <NavigationProperty Name="Geo" Relationship="DesignModel.GeoComment" FromRole="Comment" ToRole="Geo" />
+          <NavigationProperty Name="Ratings" Relationship="DesignModel.CommentCommentRating" FromRole="Comment" ToRole="CommentRating" />
+          <NavigationProperty Name="Language" Relationship="DesignModel.LanguageComment" FromRole="Comment" ToRole="Language" />
+        </EntityType>
+        <Association Name="CommentChilds">
+          <End Type="DesignModel.Comment" Role="Parent" Multiplicity="*" />
+          <End Type="DesignModel.Comment" Role="Childs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Childs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CommentRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentId" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comment" Relationship="DesignModel.CommentCommentRating" FromRole="CommentRating" ToRole="Comment" />
+        </EntityType>
+        <EntityType Name="GeoActual">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeoId" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Value" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Geo" Relationship="DesignModel.GeoGeoActual" FromRole="GeoActual" ToRole="Geo" />
+        </EntityType>
+        <EntityType Name="Geo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="256" Nullable="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="GeoData" Type="Geography" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="DesignModel.GeoComment" FromRole="Geo" ToRole="Comment" />
+          <NavigationProperty Name="Actuals" Relationship="DesignModel.GeoGeoActual" FromRole="Geo" ToRole="GeoActual" />
+          <NavigationProperty Name="Ratings" Relationship="DesignModel.GeoGeoRating" FromRole="Geo" ToRole="GeoRating" />
+          <NavigationProperty Name="Tags" Relationship="DesignModel.GeoGeoTag" FromRole="Geo" ToRole="GeoTag" />
+        </EntityType>
+        <EntityType Name="GeoTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeoId" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+          <NavigationProperty Name="Geo" Relationship="DesignModel.GeoGeoTag" FromRole="GeoTag" ToRole="Geo" />
+        </EntityType>
+        <EntityType Name="GeoRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeoId" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Geo" Relationship="DesignModel.GeoGeoRating" FromRole="GeoRating" ToRole="Geo" />
+        </EntityType>
+        <Association Name="GeoComment">
+          <End Type="DesignModel.Geo" Role="Geo" Multiplicity="0..1" />
+          <End Type="DesignModel.Comment" Role="Comment" Multiplicity="*" />
+        </Association>
+        <Association Name="GeoGeoActual">
+          <End Type="DesignModel.Geo" Role="Geo" Multiplicity="1" />
+          <End Type="DesignModel.GeoActual" Role="GeoActual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Geo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeoActual">
+              <PropertyRef Name="GeoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GeoGeoRating">
+          <End Type="DesignModel.Geo" Role="Geo" Multiplicity="1" />
+          <End Type="DesignModel.GeoRating" Role="GeoRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Geo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeoRating">
+              <PropertyRef Name="GeoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GeoGeoTag">
+          <End Type="DesignModel.Geo" Role="Geo" Multiplicity="1" />
+          <End Type="DesignModel.GeoTag" Role="GeoTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Geo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeoTag">
+              <PropertyRef Name="GeoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CommentCommentRating">
+          <End Type="DesignModel.Comment" Role="Comment" Multiplicity="1" />
+          <End Type="DesignModel.CommentRating" Role="CommentRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommentRating">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+          </Property>
+          <Property Name="Code" Type="String" Nullable="false" FixedLength="true" MaxLength="2" >
+            <Documentation>
+              <Summary>ISO-639</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FullName" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="LanguageComment">
+          <End Type="DesignModel.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="DesignModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DesignModelStoreContainer" CdmEntityContainer="DesignModelContainer">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="IsTypeOf(DesignModel.Comment)">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommentRatings">
+      <EntityTypeMapping TypeName="IsTypeOf(DesignModel.CommentRating)">
+        <MappingFragment StoreEntitySet="CommentRatings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeoActuals">
+      <EntityTypeMapping TypeName="IsTypeOf(DesignModel.GeoActual)">
+        <MappingFragment StoreEntitySet="GeoActuals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GeoId" ColumnName="GeoId" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Geos">
+      <EntityTypeMapping TypeName="IsTypeOf(DesignModel.Geo)">
+        <MappingFragment StoreEntitySet="Geos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="GeoData" ColumnName="GeoData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeoTags">
+      <EntityTypeMapping TypeName="IsTypeOf(DesignModel.GeoTag)">
+        <MappingFragment StoreEntitySet="GeoTags">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GeoId" ColumnName="GeoId" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeoRatings">
+      <EntityTypeMapping TypeName="IsTypeOf(DesignModel.GeoRating)">
+        <MappingFragment StoreEntitySet="GeoRatings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GeoId" ColumnName="GeoId" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="IsTypeOf(DesignModel.Language)">
+        <MappingFragment StoreEntitySet="Languages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GeoComment" TypeName="DesignModel.GeoComment" StoreEntitySet="Comments">
+      <EndProperty Name="Geo">
+        <ScalarProperty Name="Id" ColumnName="Geo_Id" />
+      </EndProperty>
+      <EndProperty Name="Comment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Geo_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
