@@ -1,0 +1,20 @@
+﻿@model string
+
+@{
+    //var grid = new WebGrid(source: Model.Person.Phones, defaultSort:"Prato", rowsPerPage:5);
+}
+
+@Html.EditorFor(x => x, "")
+
+@* 
+@grid.GetHtml(
+    tableStyle: "table", 
+    headerStyle: "header", 
+    mode: WebGridPagerModes.All, 
+    columns: new[]  // colums in grid
+    {
+        grid.Column(format: (item) => item, columnName: "Phone")
+        @* grid.Column(format: (item) => @Html.Partial("Index/_EditButtons", new {id = item.Id})) *@
+    }
+) 
+*@

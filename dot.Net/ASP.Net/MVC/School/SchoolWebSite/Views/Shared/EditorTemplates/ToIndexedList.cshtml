@@ -1,0 +1,18 @@
+﻿@model IList<String>
+
+@{
+    var grid = new WebGrid(source: Model, defaultSort:"Prato", rowsPerPage:5);
+    int itemIndex = 0;
+}
+
+@grid.GetHtml(
+    tableStyle: "table", 
+    headerStyle: "header", 
+    mode: WebGridPagerModes.All, 
+    columns: new[]  // colums in grid
+    {
+        grid.Column(format: (item) => @Html.EditorFor(x => x[0]), columnName: "Phone")
+        @* grid.Column(format: (item) => @Html.Partial("Index/_EditButtons", new {id = item.Id})) *@
+    }        
+) 
+             

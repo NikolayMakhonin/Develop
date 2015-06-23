@@ -1,0 +1,71 @@
+﻿@model SchoolDataLayer.EntityModel.Learner
+
+    <div class="form-horizontal">
+        <h4>Общая информация</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Person.FirstName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Person.FirstName)
+                @Html.ValidationMessageFor(model => model.Person.FirstName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Person.LastName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Person.LastName)
+                @Html.ValidationMessageFor(model => model.Person.LastName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Person.MiddleName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Person.MiddleName)
+                @Html.ValidationMessageFor(model => model.Person.MiddleName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Person.Gender, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Person.Gender)
+                @Html.ValidationMessageFor(model => model.Person.Gender)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthdate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Birthdate)
+                @Html.ValidationMessageFor(model => model.Birthdate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.School, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.School)
+                @Html.ValidationMessageFor(model => model.School)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Class, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Class)
+                @Html.ValidationMessageFor(model => model.Class)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Person.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Person.Email)
+                @Html.ValidationMessageFor(model => model.Person.Email)
+            </div>
+        </div>
+    </div>
+

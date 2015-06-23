@@ -1,0 +1,38 @@
+﻿@model SchoolDataLayer.EntityModel.Person
+
+@{                
+    int itemIndex = -1;
+    var grid = new WebGrid(source: Model.Phones, defaultSort:"Prato", rowsPerPage:5);
+    Html.EnableUnobtrusiveJavaScript(true);
+}
+
+<div id="personPhonesContainer">
+    @grid.GetHtml(
+        tableStyle: "table", 
+        headerStyle: "header", 
+        mode: WebGridPagerModes.All, 
+        columns: new[] {  // colums in grid
+            grid.Column(
+                columnName: "Phone",                    
+                format: @<span>@{ itemIndex++; }@Html.EditorFor(x => x.Phones[itemIndex])</span>
+            ),
+            grid.Column(format: (item) => @Ajax.ActionLink("Delete", "DeletePhone", new {id = Model.Id, index = itemIndex}, new AjaxOptions
+            {
+                Confirm = "Do you want to delete phone",
+                HttpMethod = "POST",
+                UpdateTargetId = "personPhonesContainer",
+                InsertionMode = InsertionMode.Replace 
+            }))
+        }       
+    )
+</div>
+
+@*
+@using (Ajax.BeginForm(null, null, new {id = "personPhones"}, new AjaxOptions()
+{
+    UpdateTargetId = "personPhonesContainer",
+    InsertionMode = InsertionMode.Replace 
+}))
+{
+} 
+*@

@@ -1,0 +1,40 @@
+﻿@using SchoolDataLayer.EntityModel
+@model Learner
+
+@{
+    ViewBag.Title = "Edit";
+    var grid = new WebGrid(source: Model.Person.Phones, defaultSort:"Prato", rowsPerPage:5);
+}
+
+<h2>Ученик @Model.Person.LastName @Model.Person.FirstName @Model.Person.MiddleName 
+<a href="#" onclick="$('#learnerMainForm').submit();">✔</a> <a href="#" onclick="$('#learnerMainForm')[0].reset();">✘</a></h2>
+<br/>
+ID: @Model.IdPerson
+<br/>
+<br/>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "learnerMainForm"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.IdPerson)
+
+    @Html.Partial("Edit/_MainInfo", Model)
+}
+
+@Ajax.ActionLink("Add", "AddPhone", new {id = Model.IdPerson}, new AjaxOptions
+{
+    Confirm = "Do you want to delete phone",
+    HttpMethod = "POST",
+    UpdateTargetId = "personPhonesContainer",
+    InsertionMode = InsertionMode.Replace 
+})
+@Html.EditorFor(x => x.Person, "Person/Phones/_Grid")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

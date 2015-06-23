@@ -1,0 +1,38 @@
+﻿@model Object
+
+@{
+    var separator = " | ";
+    bool firstButton = true;
+    var buttons = ViewData["buttons"];
+}
+
+@foreach(var button)
+
+@if ((bool?) ViewData["edit"] == true)
+{
+    <text>
+    @Html.ActionLink("Edit", "Edit", Model)
+
+    @{ if(!firstButton) { @separator; } else { firstButton = true; } }
+    </text>
+}
+@if ((bool?) ViewData["edit"] == true)
+{
+    <text>
+    @Html.ActionLink("Details", "Details", Model)
+
+    @{ if(!firstButton) { @separator; } else { firstButton = true; } }
+    </text>
+}
+@if ((bool?) ViewData["edit"] == true)
+{
+    <text>
+    @Html.ActionLink("Delete", "Delete", Model)
+
+    @{ if(!firstButton) { @separator; } else { firstButton = true; } }
+    </text>
+}
+
+@Html.ActionLink("Details", "Details", Model) |
+@Html.ActionLink("Delete", "Delete", Model)
+

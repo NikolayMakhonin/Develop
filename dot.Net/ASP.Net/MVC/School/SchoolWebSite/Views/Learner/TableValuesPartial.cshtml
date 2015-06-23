@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SchoolDataLayer.EntityModel.Person>
+
+@{
+    Layout = "~/Views/Shared/Person/_Index.cshtml";
+    ViewBag.Title = "Index";
+}
+
+@section TableHeaders
+{
+    <th>
+        @Html.DisplayNameFor(model => model.Learner.School)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Learner.Class)
+    </th>
+}
+
+@section TableValues
+{
+    <td>
+        @Html.DisplayFor(modelItem => item.Learner.School)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Learner.Class)
+    </td>
+}

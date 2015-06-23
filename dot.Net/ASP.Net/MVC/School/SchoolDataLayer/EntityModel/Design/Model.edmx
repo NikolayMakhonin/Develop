@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchoolModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SchoolModelStoreContainer">
+    <EntitySet Name="Persons" EntityType="SchoolModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parents" EntityType="SchoolModel.Store.Parents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Teachers" EntityType="SchoolModel.Store.Teachers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Learners" EntityType="SchoolModel.Store.Learners" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Courses" EntityType="SchoolModel.Store.Courses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LearnerParent" EntityType="SchoolModel.Store.LearnerParent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TeacherCourse" EntityType="SchoolModel.Store.TeacherCourse" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PersonTeacher" Association="SchoolModel.Store.PersonTeacher">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="PersonParent" Association="SchoolModel.Store.PersonParent">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Parent" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="PersonLearner" Association="SchoolModel.Store.PersonLearner">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Learner" EntitySet="Learners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LearnerParent_Learner" Association="SchoolModel.Store.FK_LearnerParent_Learner">
+      <End Role="Learner" EntitySet="Learners" />
+      <End Role="LearnerParent" EntitySet="LearnerParent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LearnerParent_Parent" Association="SchoolModel.Store.FK_LearnerParent_Parent">
+      <End Role="Parent" EntitySet="Parents" />
+      <End Role="LearnerParent" EntitySet="LearnerParent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherCourse_Teacher" Association="SchoolModel.Store.FK_TeacherCourse_Teacher">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherCourse_Course" Association="SchoolModel.Store.FK_TeacherCourse_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="TeacherCourse" EntitySet="TeacherCourse" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="400" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="Phones_SerializedValue" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Parents">
+    <Key>
+      <PropertyRef Name="IdPerson" />
+    </Key>
+    <Property Name="IdPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobPlace" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="Office" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="IdPerson" />
+    </Key>
+    <Property Name="IdPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ScholasticDegree" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Learners">
+    <Key>
+      <PropertyRef Name="IdPerson" />
+    </Key>
+    <Property Name="IdPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Birthdate" Type="datetime" Nullable="false" />
+    <Property Name="School" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Class" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPerson" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LearnerParent">
+    <Key>
+      <PropertyRef Name="Learner_IdPerson" />
+      <PropertyRef Name="Parent_IdPerson" />
+    </Key>
+    <Property Name="Learner_IdPerson" Type="int" Nullable="false" />
+    <Property Name="Parent_IdPerson" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeacherCourse">
+    <Key>
+      <PropertyRef Name="Teacher_IdPerson" />
+      <PropertyRef Name="Course_Id" />
+    </Key>
+    <Property Name="Teacher_IdPerson" Type="int" Nullable="false" />
+    <Property Name="Course_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonTeacher">
+    <End Role="Person" Type="SchoolModel.Store.Persons" Multiplicity="1" />
+    <End Role="Teacher" Type="SchoolModel.Store.Teachers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonParent">
+    <End Role="Person" Type="SchoolModel.Store.Persons" Multiplicity="1" />
+    <End Role="Parent" Type="SchoolModel.Store.Parents" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parent">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonLearner">
+    <End Role="Person" Type="SchoolModel.Store.Persons" Multiplicity="1" />
+    <End Role="Learner" Type="SchoolModel.Store.Learners" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Learner">
+        <PropertyRef Name="IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LearnerParent_Learner">
+    <End Role="Learner" Type="SchoolModel.Store.Learners" Multiplicity="1" />
+    <End Role="LearnerParent" Type="SchoolModel.Store.LearnerParent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Learner">
+        <PropertyRef Name="IdPerson" />
+      </Principal>
+      <Dependent Role="LearnerParent">
+        <PropertyRef Name="Learner_IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LearnerParent_Parent">
+    <End Role="LearnerParent" Type="SchoolModel.Store.LearnerParent" Multiplicity="*" />
+    <End Role="Parent" Type="SchoolModel.Store.Parents" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="IdPerson" />
+      </Principal>
+      <Dependent Role="LearnerParent">
+        <PropertyRef Name="Parent_IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherCourse_Teacher">
+    <End Role="Teacher" Type="SchoolModel.Store.Teachers" Multiplicity="1" />
+    <End Role="TeacherCourse" Type="SchoolModel.Store.TeacherCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="IdPerson" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="Teacher_IdPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherCourse_Course">
+    <End Role="TeacherCourse" Type="SchoolModel.Store.TeacherCourse" Multiplicity="*" />
+    <End Role="Course" Type="SchoolModel.Store.Courses" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherCourse">
+        <PropertyRef Name="Course_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SchoolEntitiesDesign" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Persons" EntityType="SchoolModel.Person" />
+          <EntitySet Name="Parents" EntityType="SchoolModel.Parent" />
+          <EntitySet Name="Teachers" EntityType="SchoolModel.Teacher" />
+          <AssociationSet Name="PersonTeacher" Association="SchoolModel.PersonTeacher">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="PersonParent" Association="SchoolModel.PersonParent">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <EntitySet Name="Learners" EntityType="SchoolModel.Learner" />
+          <AssociationSet Name="PersonLearner" Association="SchoolModel.PersonLearner">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Learner" EntitySet="Learners" />
+          </AssociationSet>
+          <AssociationSet Name="LearnerParent" Association="SchoolModel.LearnerParent">
+            <End Role="Learner" EntitySet="Learners" />
+            <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <EntitySet Name="Courses" EntityType="SchoolModel.Course" />
+          <AssociationSet Name="TeacherCourse" Association="SchoolModel.TeacherCourse">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Person" Abstract="false">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Teacher" Relationship="SchoolModel.PersonTeacher" FromRole="Person" ToRole="Teacher" />
+          <NavigationProperty Name="Parent" Relationship="SchoolModel.PersonParent" FromRole="Person" ToRole="Parent" />
+          <NavigationProperty Name="Learner" Relationship="SchoolModel.PersonLearner" FromRole="Person" ToRole="Learner" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" />
+          <Property Name="MiddleName" Type="String" Nullable="true" MaxLength="50" Unicode="true" />
+          <Property Name="Gender" Type="SchoolModel.Gender" Nullable="false" >
+            <Documentation>
+              <Summary>0 - Male; 1 - Female</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="400" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="true" MaxLength="100" />
+          <Property Name="Phones" Type="SchoolModel.Phones" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="IdPerson" />
+          </Key>
+          <Property Name="IdPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Person" Relationship="SchoolModel.PersonParent" FromRole="Parent" ToRole="Person" />
+          <Property Name="JobPlace" Type="String" MaxLength="200" Nullable="true" Unicode="true" />
+          <Property Name="Office" Type="String" MaxLength="200" Nullable="true" Unicode="true" />
+          <NavigationProperty Name="Learner" Relationship="SchoolModel.LearnerParent" FromRole="Parent" ToRole="Learner" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="IdPerson" />
+          </Key>
+          <Property Name="IdPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Person" Relationship="SchoolModel.PersonTeacher" FromRole="Teacher" ToRole="Person" />
+          <Property Name="ScholasticDegree" Type="String" Nullable="true" Unicode="true" />
+          <NavigationProperty Name="Course" Relationship="SchoolModel.TeacherCourse" FromRole="Teacher" ToRole="Course" />
+        </EntityType>
+        <Association Name="PersonTeacher">
+          <End Type="SchoolModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="SchoolModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonParent">
+          <End Type="SchoolModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="SchoolModel.Parent" Role="Parent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Learner">
+          <Key>
+            <PropertyRef Name="IdPerson" />
+          </Key>
+          <Property Name="IdPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Person" Relationship="SchoolModel.PersonLearner" FromRole="Learner" ToRole="Person" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" />
+          <Property Name="School" Type="String" Nullable="false" MaxLength="100" Unicode="true" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="10" Unicode="true" />
+          <NavigationProperty Name="Parent" Relationship="SchoolModel.LearnerParent" FromRole="Learner" ToRole="Parent" />
+        </EntityType>
+        <Association Name="PersonLearner">
+          <End Type="SchoolModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="SchoolModel.Learner" Role="Learner" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Learner">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LearnerParent">
+          <End Type="SchoolModel.Learner" Role="Learner" Multiplicity="*" />
+          <End Type="SchoolModel.Parent" Role="Parent" Multiplicity="*" />
+        </Association>
+        <EnumType Name="Gender">
+          <Member Name="Male" Value="0" />
+          <Member Name="Female" Value="1" />
+        </EnumType>
+        <ComplexType Name="Phones" >
+          <Property Type="String" Name="SerializedValue" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPerson" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="SchoolModel.TeacherCourse" FromRole="Course" ToRole="Teacher" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" />
+        </EntityType>
+        <Association Name="TeacherCourse">
+          <End Type="SchoolModel.Teacher" Role="Teacher" Multiplicity="*" />
+          <End Type="SchoolModel.Course" Role="Course" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer" CdmEntityContainer="SchoolEntitiesDesign">
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolModel.Person)">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ComplexProperty Name="Phones" TypeName="SchoolModel.Phones">
+            <ScalarProperty Name="SerializedValue" ColumnName="Phones_SerializedValue" />
+          </ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parents">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolModel.Parent)">
+        <MappingFragment StoreEntitySet="Parents">
+          <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+          <ScalarProperty Name="JobPlace" ColumnName="JobPlace" />
+          <ScalarProperty Name="Office" ColumnName="Office" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolModel.Teacher)">
+        <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+          <ScalarProperty Name="ScholasticDegree" ColumnName="ScholasticDegree" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Learners">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolModel.Learner)">
+        <MappingFragment StoreEntitySet="Learners">
+          <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="School" ColumnName="School" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="IsTypeOf(SchoolModel.Course)">
+        <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LearnerParent" TypeName="SchoolModel.LearnerParent" StoreEntitySet="LearnerParent">
+      <EndProperty Name="Learner">
+        <ScalarProperty Name="IdPerson" ColumnName="Learner_IdPerson" />
+      </EndProperty>
+      <EndProperty Name="Parent">
+        <ScalarProperty Name="IdPerson" ColumnName="Parent_IdPerson" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TeacherCourse" TypeName="SchoolModel.TeacherCourse" StoreEntitySet="TeacherCourse">
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="IdPerson" ColumnName="Teacher_IdPerson" />
+      </EndProperty>
+      <EndProperty Name="Course">
+        <ScalarProperty Name="Id" ColumnName="Course_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
