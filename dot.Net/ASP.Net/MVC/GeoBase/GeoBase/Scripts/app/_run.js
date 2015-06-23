@@ -1,7 +1,12 @@
 ﻿$(function () {
-    app.initialize();
+    GeoBase.account.instance.initialize();
+    GeoBase.geo.instance.initialize();
 
     // Activate Knockout
     ko.validation.init({ grouping: { observable: false } });
-    ko.applyBindings(app);
+
+    ko.applyBindings({
+        account: GeoBase.account.instance,
+        geo: GeoBase.geo.instance
+    });
 });

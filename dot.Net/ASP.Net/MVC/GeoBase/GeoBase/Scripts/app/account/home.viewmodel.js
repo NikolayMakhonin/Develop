@@ -1,10 +1,10 @@
-﻿function HomeViewModel(app, dataModel) {
+﻿function HomeViewModel(account, dataModel) {
     var self = this;
 
     // HomeViewModel currently does not require data binding, so there are no visible members.
 }
 
-app.addViewModel({
+GeoBase.account.instance.addViewModel({
     name: "Home",
     bindingMemberName: "home",
     factory: HomeViewModel

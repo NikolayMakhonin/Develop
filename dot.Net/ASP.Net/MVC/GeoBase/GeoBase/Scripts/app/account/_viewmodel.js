@@ -1,6 +1,6 @@
-///<reference path="../typings/jquery/jquery.d.ts"/>
-///<reference path="../typings/knockout/knockout.d.ts"/>
-///<reference path="base/datamodel.ts"/>
+///<reference path="../../typings/jquery/jquery.d.ts"/>
+///<reference path="../../typings/knockout/knockout.d.ts"/>
+///<reference path="../base/datamodel.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -10,7 +10,7 @@ var __extends = this.__extends || function (d, b) {
 var GeoBase;
 (function (GeoBase) {
     var account;
-    (function (account) {
+    (function (_account) {
         var BaseViewModel = GeoBase.base.BaseViewModel;
         var AppViewModel = (function (_super) {
             __extends(AppViewModel, _super);
@@ -40,7 +40,6 @@ var GeoBase;
                 this._dataModel.clearAccessToken();
                 this.navigateToLogin();
             };
-            // Other navigateToX functions are added dynamically by app.addViewModel(...).
             // Other operations
             AppViewModel.prototype.initialize = function () {
                 var _this = this;
@@ -120,8 +119,8 @@ var GeoBase;
             };
             return AppViewModel;
         })(BaseViewModel);
-        account.AppViewModel = AppViewModel;
-        account.app = new AppViewModel(new account.AppDataModel());
+        _account.AppViewModel = AppViewModel;
+        _account.instance = new AppViewModel(new _account.AppDataModel());
     })(account = GeoBase.account || (GeoBase.account = {}));
 })(GeoBase || (GeoBase = {}));
-//# sourceMappingURL=app.viewmodel.js.map
+//# sourceMappingURL=_viewmodel.js.map

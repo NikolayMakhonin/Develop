@@ -1,4 +1,4 @@
-﻿function RegisterViewModel(app, dataModel) {
+﻿function RegisterViewModel(account, dataModel) {
     var self = this;
 
     // Data
@@ -33,7 +33,7 @@
                 self.registering(false);
 
                 if (data.userName && data.access_token) {
-                    app.navigateToLoggedIn(data.userName, data.access_token, false /* persistent */);
+                    account.navigateToLoggedIn(data.userName, data.access_token, false /* persistent */);
                 } else {
                     self.errors.push("Произошла неизвестная ошибка.");
                 }
@@ -61,11 +61,11 @@
     };
 
     self.login = function () {
-        app.navigateToLogin();
+        account.navigateToLogin();
     };
 }
 
-app.addViewModel({
+GeoBase.account.instance.addViewModel({
     name: "Register",
     bindingMemberName: "register",
     factory: RegisterViewModel

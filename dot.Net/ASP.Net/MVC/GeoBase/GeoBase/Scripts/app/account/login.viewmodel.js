@@ -1,4 +1,4 @@
-﻿function LoginViewModel(app, dataModel) {
+﻿function LoginViewModel(account, dataModel) {
     // Private state
     var self = this,
         validationTriggered = ko.observable(false);
@@ -10,7 +10,7 @@
                 self.loadingExternalLogin(false);
                 if (typeof (data) === "object") {
                     for (var i = 0; i < data.length; i++) {
-                        self.externalLoginProviders.push(new ExternalLoginProviderViewModel(app, data[i]));
+                        self.externalLoginProviders.push(new ExternalLoginProviderViewModel(account, data[i]));
                     }
                 } else {
                     self.errors.push("Произошла неизвестная ошибка.");
@@ -56,7 +56,7 @@
             self.loggingIn(false);
 
             if (data.userName && data.access_token) {
-                app.navigateToLoggedIn(data.userName, data.access_token, self.rememberMe());
+                account.navigateToLoggedIn(data.userName, data.access_token, self.rememberMe());
             } else {
                 self.errors.push("Произошла неизвестная ошибка.");
             }
@@ -72,13 +72,13 @@
     };
 
     self.register = function () {
-        app.navigateToRegister();
+        account.navigateToRegister();
     };
 
     initialize();
 }
 
-function ExternalLoginProviderViewModel(app, data) {
+function ExternalLoginProviderViewModel(account, data) {
     var self = this;
 
     // Data
@@ -90,20 +90,20 @@ function ExternalLoginProviderViewModel(app, data) {
         sessionStorage["loginUrl"] = data.url;
         // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage temporarily
         // to localStorage to work around this problem.
-        app.archiveSessionStorageToLocalStorage();
+        account.archiveSessionStorageToLocalStorage();
         window.location = data.url;
     };
 }
 
-app.addViewModel({
+GeoBase.account.instance.addViewModel({
     name: "Login",
     bindingMemberName: "login",
     factory: LoginViewModel,
-    navigatorFactory: function (app) {
+    navigatorFactory: function (account) {
         return function () {
-            app.errors.removeAll();
-            app.user(null);
-            app.view(app.Views.Login);
+            account.errors.removeAll();
+            account.user(null);
+            account.view(account.Views.Login);
         };
     }
 });

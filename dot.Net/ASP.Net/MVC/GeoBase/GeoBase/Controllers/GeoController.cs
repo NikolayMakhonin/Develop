@@ -17,10 +17,10 @@ namespace GeoBase.Controllers
 {
     public class GeoController : ApiController
     {
-        private GeoModel db = new GeoModel();
+        private readonly GeoModel db = new GeoModel();
 
         // GET api/Geo
-        [GeographyCountValidationAttribute(PointCount = 1)]
+        [GeographyCountValidationAttribute(ElementCount = 1, PointMinCount = 1, PointMaxCount = 4)]
         public IQueryable<Geo> GetGeos(DbGeography area)
         {
             return from g in db.Geos 

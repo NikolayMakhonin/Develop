@@ -14,6 +14,7 @@
     <RootNamespace>GeoBase</RootNamespace>
     <AssemblyName>GeoBase</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -226,9 +227,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\geo\app.datamodel.js" />
-    <Content Include="Scripts\app\geo\app.viewmodel.js" />
-    <Content Include="Scripts\app\geo\_run.js" />
+    <TypeScriptCompile Include="Scripts\app\base\viewmodel.ts" />
+    <TypeScriptCompile Include="Scripts\app\geo\_datamodel.ts" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -254,15 +254,15 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\app\_run.js" />
-    <Content Include="Scripts\app\ajaxPrefilters.js" />
-    <Content Include="Scripts\app\app.datamodel.js" />
-    <Content Include="Scripts\app\app.viewmodel.js" />
-    <Content Include="Scripts\app\home.viewmodel.js" />
-    <Content Include="Scripts\app\login.viewmodel.js" />
-    <Content Include="Scripts\app\manage.viewmodel.js" />
-    <Content Include="Scripts\app\register.viewmodel.js" />
-    <Content Include="Scripts\app\registerExternal.viewmodel.js" />
-    <Content Include="Scripts\app\userInfo.viewmodel.js" />
+    <Content Include="Scripts\app\base\ajaxPrefilters.js" />
+    <TypeScriptCompile Include="Scripts\app\account\_datamodel.ts" />
+    <TypeScriptCompile Include="Scripts\app\account\_viewmodel.ts" />
+    <Content Include="Scripts\app\account\home.viewmodel.js" />
+    <Content Include="Scripts\app\account\login.viewmodel.js" />
+    <Content Include="Scripts\app\account\manage.viewmodel.js" />
+    <Content Include="Scripts\app\account\register.viewmodel.js" />
+    <Content Include="Scripts\app\account\registerExternal.viewmodel.js" />
+    <Content Include="Scripts\app\account\userInfo.viewmodel.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\_Home.cshtml" />
     <Content Include="Views\Home\_Login.cshtml" />
@@ -285,6 +285,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <TypeScriptCompile Include="Scripts\app\geo\_viewmodel.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -301,6 +304,9 @@
       <Project>{a32ddac1-e98f-48e0-83a1-3a3cd3011726}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\app\base\datamodel.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -330,6 +336,20 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,4 +1,4 @@
-﻿function ManageViewModel(app, dataModel) {
+﻿function ManageViewModel(account, dataModel) {
     var self = this,
         startedLoad = false;
 
@@ -33,7 +33,7 @@
             return null;
         }
 
-        return new ChangePasswordViewModel(app, self, self.userName(), dataModel);
+        return new ChangePasswordViewModel(account, self, self.userName(), dataModel);
     });
 
     self.setPassword = ko.computed(function () {
@@ -41,7 +41,7 @@
             return null;
         }
 
-        return new SetPasswordViewModel(app, self, dataModel);
+        return new SetPasswordViewModel(account, self, dataModel);
     });
 
     self.hasExternalLogin = ko.computed(function () {
@@ -71,11 +71,11 @@
                         }
 
                         for (var i = 0; i < data.externalLoginProviders.length; i++) {
-                            self.externalLoginProviders.push(new AddExternalLoginProviderViewModel(app,
+                            self.externalLoginProviders.push(new AddExternalLoginProviderViewModel(account,
                                 data.externalLoginProviders[i]));
                         }
                     } else {
-                        app.errors.push("При извлечении информации о пользователе произошла ошибка.");
+                        account.errors.push("При извлечении информации о пользователе произошла ошибка.");
                     }
 
                     self.loading(false);
@@ -86,16 +86,16 @@
                     errors = dataModel.toErrorsArray(data);
 
                     if (errors) {
-                        app.errors(errors);
+                        account.errors(errors);
                     } else {
-                        app.errors.push("При извлечении информации о пользователе произошла ошибка.");
+                        account.errors.push("При извлечении информации о пользователе произошла ошибка.");
                     }
                 });
         }
     }
 
     self.home = function () {
-        app.navigateToHome();
+        account.navigateToHome();
     };
 
     self.addExternalLogin = function (externalAccessToken, externalError) {
@@ -122,7 +122,7 @@
     };
 }
 
-function AddExternalLoginProviderViewModel(app, data) {
+function AddExternalLoginProviderViewModel(account, data) {
     var self = this;
 
     // Data
@@ -134,12 +134,12 @@ function AddExternalLoginProviderViewModel(app, data) {
         sessionStorage["associatingExternalLogin"] = true;
         // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage temporarily
         // to localStorage to work around this problem.
-        app.archiveSessionStorageToLocalStorage();
+        account.archiveSessionStorageToLocalStorage();
         window.location = data.url;
     };
 }
 
-function ChangePasswordViewModel(app, parent, name, dataModel) {
+function ChangePasswordViewModel(account, parent, name, dataModel) {
     var self = this;
 
     // Private operations
@@ -232,7 +232,7 @@ function RemoveLoginViewModel(data, parent, dataModel) {
     };
 }
 
-function SetPasswordViewModel(app, parent, dataModel) {
+function SetPasswordViewModel(account, parent, dataModel) {
     var self = this;
 
     // Data
@@ -278,19 +278,19 @@ function SetPasswordViewModel(app, parent, dataModel) {
     };
 }
 
-app.addViewModel({
+GeoBase.account.instance.addViewModel({
     name: "Manage",
     bindingMemberName: "manage",
     factory: ManageViewModel,
-    navigatorFactory: function (app) {
+    navigatorFactory: function (account) {
         return function (externalAccessToken, externalError) {
-            app.errors.removeAll();
-            app.view(app.Views.Manage);
+            account.errors.removeAll();
+            account.view(account.Views.Manage);
 
             if (typeof (externalAccessToken) !== "undefined" || typeof (externalError) !== "undefined") {
-                app.manage().addExternalLogin(externalAccessToken, externalError);
+                account.manage().addExternalLogin(externalAccessToken, externalError);
             } else {
-                app.manage().load();
+                account.manage().load();
             };
         }
     }

@@ -17,17 +17,27 @@ namespace GeoBase
                 "~/Scripts/knockout-{version}.js",
                 "~/Scripts/knockout.validation.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/app/base").Include(
+                "~/Scripts/app/base/ajaxPrefilters.js",
+                "~/Scripts/app/base/datamodel.js",
+                "~/Scripts/app/base/viewmodel.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app/account").Include(
+                "~/Scripts/app/account/_datamodel.js",
+                "~/Scripts/app/account/_viewmodel.js",
+                "~/Scripts/app/account/home.viewmodel.js",
+                "~/Scripts/app/account/login.viewmodel.js",
+                "~/Scripts/app/account/register.viewmodel.js",
+                "~/Scripts/app/account/registerExternal.viewmodel.js",
+                "~/Scripts/app/account/manage.viewmodel.js",
+                "~/Scripts/app/account/userInfo.viewmodel.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app/geo").Include(
+                "~/Scripts/app/geo/_datamodel.js",
+                "~/Scripts/app/geo/_viewmodel.js"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/Scripts/app/ajaxPrefilters.js",
-                "~/Scripts/app/app.bindings.js",
-                "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.viewmodel.js",
-                "~/Scripts/app/home.viewmodel.js",
-                "~/Scripts/app/login.viewmodel.js",
-                "~/Scripts/app/register.viewmodel.js",
-                "~/Scripts/app/registerExternal.viewmodel.js",
-                "~/Scripts/app/manage.viewmodel.js",
-                "~/Scripts/app/userInfo.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
             // Используйте версию Modernizr для разработчиков, чтобы учиться работать. Когда вы будете готовы перейти к работе,

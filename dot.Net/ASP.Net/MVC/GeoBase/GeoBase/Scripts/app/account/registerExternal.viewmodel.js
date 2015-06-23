@@ -1,4 +1,4 @@
-﻿function RegisterExternalViewModel(app, dataModel) {
+﻿function RegisterExternalViewModel(account, dataModel) {
     // Private state
     var self = this;
 
@@ -30,7 +30,7 @@
             sessionStorage["state"] = self.state;
             // IE doesn't reliably persist sessionStorage when navigating to another URL. Move sessionStorage
             // temporarily to localStorage to work around this problem.
-            app.archiveSessionStorageToLocalStorage();
+            account.archiveSessionStorageToLocalStorage();
             window.location = self.loginUrl;
         }).failJSON(function (data) {
             var errors;
@@ -47,19 +47,19 @@
     };
 }
 
-app.addViewModel({
+GeoBase.account.instance.addViewModel({
     name: "RegisterExternal",
     bindingMemberName: "registerExternal",
     factory: RegisterExternalViewModel,
-    navigatorFactory: function (app) {
+    navigatorFactory: function (account) {
         return function (userName, loginProvider, externalAccessToken, loginUrl, state) {
-            app.errors.removeAll();
-            app.view(app.Views.RegisterExternal);
-            app.registerExternal().userName(userName);
-            app.registerExternal().loginProvider(loginProvider);
-            app.registerExternal().externalAccessToken = externalAccessToken;
-            app.registerExternal().loginUrl = loginUrl;
-            app.registerExternal().state = state;
+            account.errors.removeAll();
+            account.view(account.Views.RegisterExternal);
+            account.registerExternal().userName(userName);
+            account.registerExternal().loginProvider(loginProvider);
+            account.registerExternal().externalAccessToken = externalAccessToken;
+            account.registerExternal().loginUrl = loginUrl;
+            account.registerExternal().state = state;
         };
     }
 });

@@ -1,4 +1,4 @@
-﻿function UserInfoViewModel(app, name, dataModel) {
+﻿function UserInfoViewModel(account, name, dataModel) {
     var self = this;
 
     // Данные
@@ -7,13 +7,13 @@
     // Операции
     self.logOff = function () {
         dataModel.logout().done(function () {
-            app.navigateToLoggedOff();
+            account.navigateToLoggedOff();
         }).fail(function () {
-            app.errors.push("Не удалось выполнить выход.");
+            account.errors.push("Не удалось выполнить выход.");
         });
     };
 
     self.manage = function () {
-        app.navigateToManage();
+        account.navigateToManage();
     };
 }

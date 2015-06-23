@@ -1,5 +1,5 @@
-///<reference path="../typings/jquery/jquery.d.ts"/>
-///<reference path="base/app.datamodel.ts"/>
+///<reference path="../../typings/jquery/jquery.d.ts"/>
+///<reference path="../base/datamodel.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -156,4 +156,4 @@ var GeoBase;
         account.AppDataModel = AppDataModel;
     })(account = GeoBase.account || (GeoBase.account = {}));
 })(GeoBase || (GeoBase = {}));
-//# sourceMappingURL=app.datamodel.js.map
+//# sourceMappingURL=datamodel.js.map
