@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolWebSite", "SchoolWebS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolWebSite.Tests", "SchoolWebSite.Tests\SchoolWebSite.Tests.csproj", "{1BF51C08-EBD8-4DF3-9C1A-3A4D27D77A18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcControls", "MvcControls\MvcControls.csproj", "{65642F23-DC2C-4BCB-93D7-AB2CAFF4B917}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolWebApi", "SchoolWebApi\SchoolWebApi.csproj", "{4ED162C8-24EA-445D-B9C1-A20980A61DB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{1BF51C08-EBD8-4DF3-9C1A-3A4D27D77A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BF51C08-EBD8-4DF3-9C1A-3A4D27D77A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BF51C08-EBD8-4DF3-9C1A-3A4D27D77A18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65642F23-DC2C-4BCB-93D7-AB2CAFF4B917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65642F23-DC2C-4BCB-93D7-AB2CAFF4B917}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65642F23-DC2C-4BCB-93D7-AB2CAFF4B917}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65642F23-DC2C-4BCB-93D7-AB2CAFF4B917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED162C8-24EA-445D-B9C1-A20980A61DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED162C8-24EA-445D-B9C1-A20980A61DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED162C8-24EA-445D-B9C1-A20980A61DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED162C8-24EA-445D-B9C1-A20980A61DB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

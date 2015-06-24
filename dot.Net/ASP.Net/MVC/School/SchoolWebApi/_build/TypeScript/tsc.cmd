@@ -1,0 +1,1 @@
+"%ProgramFiles(x86)%\Microsoft SDKs\TypeScript\1.4\tsc.exe" %*
