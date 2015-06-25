@@ -1,8 +1,5 @@
 #http://git-scm.com/docs/gitignore
 
-packages
-obj
-bin
-*.pdb
-*.suo
-*.user
+*.js
+*.js.map
+!*bundled.js

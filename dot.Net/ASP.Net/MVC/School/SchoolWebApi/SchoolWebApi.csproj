@@ -256,6 +256,13 @@
     <TypeScriptCompile Include="Scripts\app\school\Kernel\filters\main.ts" />
     <Content Include="Scripts\app\school\Kernel\views\footer.html" />
     <Content Include="Scripts\app\school\Kernel\views\header.html" />
+    <TypeScriptCompile Include="Scripts\app\school\Learner\Learner.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\Learner\config\learner.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\Learner\controllers\learners.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\Learner\controllers\learner-edit.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\Learner\services\learner.ts" />
+    <Content Include="Scripts\app\school\Learner\views\learner-edit.html" />
+    <Content Include="Scripts\app\school\Learner\views\learners.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <h2>School</h2>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4>Learner list</h4>
+            </div>
+            <!-- Table -->
+            <table class="table" data-ng-controller="LearnersController">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Class</th>
+                        <th>School</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="learner in data">
+                        <td>{{learner.firstName}}</td>
+                        <td>{{learner.lastName}}</td>
+                        <td>{{learner.age}}</td>
+                        <td>{{learner.class}}</td>
+                        <td>{{learner.school}}</td>
+                        <td><a class="btn btn-default btn-sm" href="#" role="button" data-ng-click="edit">Edit</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

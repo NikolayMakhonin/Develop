@@ -37,8 +37,6 @@ angular.module('app')
                 //        var settings = data.settings[Environment.currentLocale()];
 
                 //        $rootScope.footer = settings.content.footerContent;
-                //        $rootScope.disqusShortname = settings.disqus.shortname;
-                //        $rootScope.disqusStatus = false;
                 //        $rootScope.currency = settings.general.currency;
                 //        $rootScope.paymentMethods = settings.general.paymentMethods;
 
