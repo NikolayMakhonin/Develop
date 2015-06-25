@@ -1,9 +1,10 @@
 ﻿///<reference path="../../../../typings/angularjs/angular.d.ts"/>
 ///<reference path="../../../environment.ts"/>
+///<reference path="../../../app.ts"/>
 
 'use strict';
 
-console.log('Kernel settings loaded ...');
+console.log('Kernel settings loading ...');
 angular.module('app')
     .service('settingsService', ['$http', '$rootScope', 'Environment',
         ($http, $rootScope, Environment) => {

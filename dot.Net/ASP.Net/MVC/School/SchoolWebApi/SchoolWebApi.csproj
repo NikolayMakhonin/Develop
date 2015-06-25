@@ -220,20 +220,40 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="ReadMe.txt" />
-    <None Include="_build\TypeScript\build_files.txt" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading-bar.css" />
+    <Content Include="Content\loading-bar.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Icon.png" />
+    <Content Include="ReadMe.txt" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <None Include="_build\TypeScript\build_files.txt" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-ui-router.js" />
+    <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app_bunbled.js" />
+    <TypeScriptCompile Include="Scripts\app\school\HomePage\HomePage.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\HomePage\config\homepage.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\HomePage\controllers\homepage.ts" />
+    <TypeScriptCompile Include="Scripts\app\bootstrap.ts" />
+    <Content Include="Scripts\app\school\HomePage\views\homepage.html" />
+    <TypeScriptCompile Include="Scripts\app\school\Kernel\config\resource.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\Kernel\filters\main.ts" />
     <Content Include="Scripts\app\school\Kernel\views\footer.html" />
     <Content Include="Scripts\app\school\Kernel\views\header.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -265,22 +285,23 @@
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />
     <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\r.js" />
-    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
-    <Content Include="Scripts\app\_run.js" />
-    <Content Include="Scripts\app\ajaxPrefilters.js" />
-    <Content Include="Scripts\app\app.datamodel.js" />
-    <Content Include="Scripts\app\app.viewmodel.js" />
-    <Content Include="Scripts\app\home.viewmodel.js" />
-    <Content Include="Scripts\app\login.viewmodel.js" />
-    <Content Include="Scripts\app\manage.viewmodel.js" />
-    <Content Include="Scripts\app\register.viewmodel.js" />
-    <Content Include="Scripts\app\registerExternal.viewmodel.js" />
-    <Content Include="Scripts\app\userInfo.viewmodel.js" />
+    <Content Include="Scripts\sctips_old\_references.js" />
+    <Content Include="Scripts\sctips_old\app\_run.js" />
+    <Content Include="Scripts\sctips_old\app\ajaxPrefilters.js" />
+    <Content Include="Scripts\sctips_old\app\app.datamodel.js" />
+    <Content Include="Scripts\sctips_old\app\app.viewmodel.js" />
+    <Content Include="Scripts\sctips_old\app\home.viewmodel.js" />
+    <Content Include="Scripts\sctips_old\app\login.viewmodel.js" />
+    <Content Include="Scripts\sctips_old\app\manage.viewmodel.js" />
+    <Content Include="Scripts\sctips_old\app\register.viewmodel.js" />
+    <Content Include="Scripts\sctips_old\app\registerExternal.viewmodel.js" />
+    <Content Include="Scripts\sctips_old\app\userInfo.viewmodel.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\_Home.cshtml" />
     <Content Include="Views\Home\_Login.cshtml" />
@@ -303,25 +324,22 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Shared\_Layout - Копировать.cshtml" />
     <None Include="_build\TypeScript\tsc.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\app\school\Learner\controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\app.ts" />
     <TypeScriptCompile Include="Scripts\app\environment.ts" />
+    <TypeScriptCompile Include="Scripts\app\school\Kernel\Kernel.ts" />
     <TypeScriptCompile Include="Scripts\app\school\Kernel\services\init.ts" />
     <TypeScriptCompile Include="Scripts\app\school\Kernel\services\settings.ts" />
+    <TypeScriptCompile Include="Scripts\app\_references.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
@@ -330,7 +348,6 @@
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

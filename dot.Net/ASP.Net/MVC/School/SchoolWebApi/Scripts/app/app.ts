@@ -2,13 +2,12 @@
 ///<reference path="../typings/angularjs/angular.d.ts"/>
 ///<reference path="../typings/angularjs/angular-route.d.ts"/>
 ///<reference path="environment.ts"/>
-///<reference path="school/Kernel/services/settings.ts"/>
-///<reference path="school/Kernel/services/init.ts"/>
 
 'use strict';
 
+console.log('App loading ...');
 angular.module('app', [
-    'ngRoute', 'environment'
+    'ngRoute', 'ui.router', 'angular-loading-bar', 'environment'
 ]).run(['$http', '$rootScope', 'settingsService', 'initService',
     ($http, $rootScope, settingsService, initService) => {
         initService.launch();
@@ -22,3 +21,4 @@ angular.module('app', [
         $locationProvider.html5Mode(true);
         document.getElementById("page-is-loading").style.visibility = "hidden";
     });
+

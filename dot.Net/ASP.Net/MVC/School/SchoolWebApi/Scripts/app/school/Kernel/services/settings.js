@@ -1,7 +1,8 @@
 ///<reference path="../../../../typings/angularjs/angular.d.ts"/>
 ///<reference path="../../../environment.ts"/>
+///<reference path="../../../app.ts"/>
 'use strict';
-console.log('Kernel settings loaded ...');
+console.log('Kernel settings loading ...');
 angular.module('app').service('settingsService', ['$http', '$rootScope', 'Environment', function ($http, $rootScope, Environment) {
     return {
         getApplicationConfig: function () {

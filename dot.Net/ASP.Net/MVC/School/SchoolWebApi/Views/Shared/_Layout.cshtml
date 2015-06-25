@@ -14,28 +14,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
-    <title ng-bind="pageTitle">School Title</title>
-    <meta name="description" ng-attr-content="{{metaDescription}}">
-    <meta name="keywords" ng-attr-content="{{metaKeywords}}">
+    <title data-ng-bind="pageTitle">School Title</title>
+    <meta name="description" data-ng-attr-content="{{metaDescription}}">
+    <meta name="keywords" data-ng-attr-content="{{metaKeywords}}">
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/app")
   </head>
 
   <body>
     <!--[if lt IE 9]>
      @Scripts.Render("~/bundles/ltIE9")
     <![endif]-->
-  
-    <!-- Website content: START -->
-    <div id="page-is-loading" class="loading-interceptor">Loading ...</div>
-    <header ng-include="'Script/app/school/header.html'"></header>
-    <div class="container website-content">
-        <div id="dynamic-content" class="view" ui-view></div>
-    </div>
-    <footer ng-include="'Script/app/school/footer.html'"></footer>
-    <!-- Website content: END -->
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/app")
   </body>
 
 </html>

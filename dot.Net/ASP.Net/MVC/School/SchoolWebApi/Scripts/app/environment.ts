@@ -1,15 +1,14 @@
-﻿///<reference path="../typings/jquery/jquery.d.ts"/>
-///<reference path="../typings/angularjs/angular.d.ts"/>
+﻿///<reference path="../typings/angularjs/angular.d.ts"/>
 
 'use strict';
 
-console.log('Environment loaded ...');
+console.log('Environment loading ...');
 angular.module('environment', [])
     .service('Environment', () => {
         return {
             settings: {
-                media: 'http://api.' + document.domain + '/media/product',
-                api: 'http://api.' + document.domain + '/frontend/api',
+                media: 'http://' + document.domain + '/media/product',
+                api: 'http://' + document.domain + '/frontend/api',
                 locale: {
                     "primary": 'en',
                     "available": ['en', 'ru']

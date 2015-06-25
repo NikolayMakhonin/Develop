@@ -12,11 +12,12 @@ namespace SchoolWebApi
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("Scripts/{assets}", new { assets = @".*\.(html)" });
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{locale}/{*path}",
+                defaults: new { controller = "Home", action = "Index", locale = UrlParameter.Optional }
             );
         }
     }

@@ -13,15 +13,14 @@ namespace SchoolWebApi
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                "~/Scripts/knockout-{version}.js",
-                "~/Scripts/knockout.validation.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/Scripts/app/jquery-*.js",
-                "~/Scripts/app/bootstrap.js",
-                "~/Scripts/app/angular.js",
-                "~/Scripts/app/angular-route.js",
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/respond.js",
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-route.js",
+                "~/Scripts/angular-ui-router.js",
+                "~/Scripts/loading-bar.js",
                 "~/Scripts/app/app_bunbled.js"));
 
             // Используйте версию Modernizr для разработчиков, чтобы учиться работать. Когда вы будете готовы перейти к работе,

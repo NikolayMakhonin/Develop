@@ -1,1 +1,1 @@
-"../../Scripts/app/app.ts" "../../Scripts/app/app_bunbled.js"
+"../../Scripts/app/_references.ts" "../../Scripts/app/app_bunbled.js"
