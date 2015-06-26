@@ -1,8 +1,0 @@
-#http://git-scm.com/docs/gitignore
-
-# Ignore everything
-*
-
-# But not these files...
-!.gitignore
-!TemplateProjects
