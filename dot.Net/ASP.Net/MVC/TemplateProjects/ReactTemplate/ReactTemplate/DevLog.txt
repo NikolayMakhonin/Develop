@@ -1,3 +1,4 @@
 ﻿Create Empty MVC 5 Application
 nuget react.js
 nuget React.Web.MVC4
+nuget Microsoft.AspNet.Web.Optimization
