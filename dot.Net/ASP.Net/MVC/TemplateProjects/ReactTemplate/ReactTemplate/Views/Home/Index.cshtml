@@ -1,7 +1,16 @@
-﻿
+﻿@using System.Web.Optimization
+
 @{
     ViewBag.Title = "Index";
 }
 
+@section scripts {
+    @Scripts.Render("~/bundles/js/react")
+    @Scripts.Render("~/bundles/js/app")
+    <script src="@Url.Content("~/Scripts/app/app.jsx")"></script>
+}
+
 <h2>Index</h2>
+
+<div id="container"></div>
 
