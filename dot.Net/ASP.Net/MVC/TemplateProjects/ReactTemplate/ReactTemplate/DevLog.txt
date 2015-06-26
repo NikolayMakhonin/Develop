@@ -1,0 +1,8 @@
+﻿Create Empty MVC 5 Application
+nuget react.js
+nuget React.Web.MVC4
+
+#http://git-scm.com/docs/gitignore
+*
+!.gitignore
+!TemplateProjects/**
