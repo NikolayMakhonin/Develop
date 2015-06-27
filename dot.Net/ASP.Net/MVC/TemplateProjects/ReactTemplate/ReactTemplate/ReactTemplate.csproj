@@ -170,9 +170,11 @@
     <Content Include="README.md" />
     <Content Include="Scripts\App\Utils\NodeJS\Events\History.md" />
     <Content Include="Scripts\App\Utils\NodeJS\Events\Readme.md" />
+    <Content Include="Scripts\App\Utils\NodeJS\ObjectAssign\readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
     <TypeScriptCompile Include="Scripts\App\Utils\NodeJS\Events\events.ts" />
+    <TypeScriptCompile Include="Scripts\App\Utils\NodeJS\ObjectAssign\object-assign.ts" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
