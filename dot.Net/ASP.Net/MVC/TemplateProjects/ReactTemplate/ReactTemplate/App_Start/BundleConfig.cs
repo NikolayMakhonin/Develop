@@ -1,4 +1,5 @@
 ﻿using System.Web.Optimization;
+using ReactTemplate.Utils;
 
 namespace ReactTemplate
 {
@@ -14,7 +15,8 @@ namespace ReactTemplate
             bundles.Add(new ScriptBundle("~/bundles/js/react").Include(
                 "~/Scripts/react/react-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/js/app").Include(
+            bundles.Add(new ScriptBundleExt("~/bundles/js/app").IncludeWithReferences(
+                "~/Scripts/app/app.jsx"
                 ));
 
             bundles.Add(new StyleBundle("~/bundles/css/vendors").Include(

@@ -1,4 +1,19 @@
 ﻿Create Empty MVC 5 Application
-nuget react.js
-nuget React.Web.MVC4
-nuget Microsoft.AspNet.Web.Optimization
+
+NuGet:
+* react.js
+* React.Web.MVC4
+* Microsoft.AspNet.Web.Optimization
+* jquery.TypeScript.DefinitelyTyped
+* React.TypeScript.DefinitelyTyped
+* Newtonsoft.Json
+
+Update VS2013
+* Updates: https://www.visualstudio.com/en-us/news/vs2013-update5-vs.aspx
+
+* Update for update 1: https://www.microsoft.com/en-us/download/details.aspx?id=42251
+* Update for update 4: http://www.microsoft.com/en-us/download/details.aspx?id=44998
+
+VS Extensions:
+* Web Essentials
+  https://visualstudiogallery.msdn.microsoft.com/56633663-6799-41d7-9df7-0f2a504ca361
