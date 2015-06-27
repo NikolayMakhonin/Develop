@@ -35,31 +35,28 @@ namespace ReactTemplate.Utils
             return this;
         }
 
-        //public override Bundle Include(params string[] virtualPaths)
-        //{
-        //    throw new NotImplementedException();
-        //    //foreach (var virtualPath in virtualPaths)
-        //    //{
-        //    //    if (_includedFiles.Contains(virtualPath)) continue;
-        //    //    _includedFiles.Add(virtualPath);
-        //    //    base.Include(virtualPath);
-        //    //}
-        //    //return this;
-        //}
+        public new ScriptBundleExt Include(params string[] virtualPaths)
+        {
+            base.Include(virtualPaths);
+            return this;
+        }
 
-        //public override Bundle Include(string virtualPath, params IItemTransform[] transforms)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public new ScriptBundleExt Include(string virtualPath, params IItemTransform[] transforms)
+        {
+            base.Include(virtualPath, transforms);
+            return this;
+        }
 
-        //public override Bundle IncludeDirectory(string directoryVirtualPath, string searchPattern)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public new ScriptBundleExt IncludeDirectory(string directoryVirtualPath, string searchPattern)
+        {
+            base.IncludeDirectory(directoryVirtualPath, searchPattern);
+            return this;
+        }
 
-        //public override Bundle IncludeDirectory(string directoryVirtualPath, string searchPattern, bool searchSubdirectories)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public new ScriptBundleExt IncludeDirectory(string directoryVirtualPath, string searchPattern, bool searchSubdirectories)
+        {
+            base.IncludeDirectory(directoryVirtualPath, searchPattern, searchSubdirectories);
+            return this;
+        }
     }
 }

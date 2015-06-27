@@ -12,6 +12,7 @@ var App;
 			App.Api.MyApi.getText()
 				.done(function(data) {
 					_this.state = data;
+					_this
 				});
 		},
 		render: function() {

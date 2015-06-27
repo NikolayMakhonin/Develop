@@ -12,8 +12,10 @@ namespace ReactTemplate
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/js/react").Include(
-                "~/Scripts/react/react-{version}.js"));
+            bundles.Add(new ScriptBundleExt("~/bundles/js/react").Include(
+                "~/Scripts/react/react-{version}.js").IncludeWithReferences(
+                "~/Scripts/react/flux/index.js"
+                ));
 
             bundles.Add(new ScriptBundleExt("~/bundles/js/app").IncludeWithReferences(
                 "~/Scripts/app/app.jsx"

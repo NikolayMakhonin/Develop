@@ -168,8 +168,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\App\app.jsx" />
     <Content Include="README.md" />
+    <Content Include="Scripts\App\Utils\NodeJS\Events\History.md" />
+    <Content Include="Scripts\App\Utils\NodeJS\Events\Readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
+    <TypeScriptCompile Include="Scripts\App\Utils\NodeJS\Events\events.ts" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -180,6 +183,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\npm.js" />
+    <TypeScriptCompile Include="Scripts\App\Utils\React\Flux\Dispatcher.ts" />
+    <TypeScriptCompile Include="Scripts\App\Utils\React\Flux\invariant.ts" />
     <Content Include="Scripts\react\JSXTransformer-0.13.1.js" />
     <Content Include="Scripts\react\react-0.13.1.js" />
     <Content Include="Scripts\react\react-0.13.1.min.js" />
@@ -208,6 +213,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\App\Utils\React\Flux\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -218,11 +224,14 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\App\Stores\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\App\Api\MyApi.ts" />
     <TypeScriptCompile Include="Scripts\App\Api\Utils\ajaxUtils.ts" />
     <TypeScriptCompile Include="Scripts\App\App.ts" />
+    <TypeScriptCompile Include="Scripts\App\Dispatchers\AppDispatcher.ts" />
+    <TypeScriptCompile Include="Scripts\typings\flux\flux.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react\react.d.ts" />
   </ItemGroup>
@@ -231,6 +240,9 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
