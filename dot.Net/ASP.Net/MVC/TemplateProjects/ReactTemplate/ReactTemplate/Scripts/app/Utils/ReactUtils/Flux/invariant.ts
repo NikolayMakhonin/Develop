@@ -22,7 +22,7 @@
  * will remain to ensure logic does not differ in production.
  */
 
-module App.Utils.React.Flux {
+module App.Utils.ReactUtils.Flux {
 
     export function invariant(condition, format, ...args) {
         if (false) {

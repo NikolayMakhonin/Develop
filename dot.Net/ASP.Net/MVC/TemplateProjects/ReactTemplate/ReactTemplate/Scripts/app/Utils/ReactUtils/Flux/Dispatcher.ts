@@ -14,7 +14,7 @@
 
 "use strict";
 
-module App.Utils.React.Flux { /**
+module App.Utils.ReactUtils.Flux { /**
      * Dispatcher is used to broadcast payloads to registered callbacks. This is
      * different from generic pub-sub systems in two ways:
      *

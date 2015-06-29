@@ -1,29 +1,7 @@
-﻿///<reference path="api/MyApi.ts"/>
-
+﻿///<reference path="../typings/react/react.d.ts"/>
+///<reference path="Components/Learner/LearnerEdit.ts"/>
 var App;
 (function (App) {
-
-	App.react = React.createClass({
-		getInitialState: function()	 {
-			return { name: 'Default name' };
-		},
-		componentDidMount: function() {
-			var _this = this;
-			App.Api.MyApi.getText()
-				.done(function(data) {
-					_this.state = data;
-					_this
-				});
-		},
-		render: function() {
-			return (
-				<div> React {this.props.name} </div>
-			);
-		}
-	});
+    var LearnerEdit = App.Components.Learner.LearnerEdit;
+    React.render(<LearnerEdit name="MyApp" />, document.getElementById('container'));
 })(App || (App = {}));
-
-React.render(
-	<App.react name="MyApp" />,
-	document.getElementById('container')
-);

@@ -157,6 +157,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="DevLog.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -166,17 +167,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Scripts\App\app.jsx" />
     <Content Include="README.md" />
+    <TypeScriptCompile Include="Scripts\App\Components\Learner\LearnerEdit.ts" />
     <Content Include="Scripts\App\Utils\NodeJS\Events\History.md" />
     <Content Include="Scripts\App\Utils\NodeJS\Events\Readme.md" />
     <Content Include="Scripts\App\Utils\NodeJS\ObjectAssign\readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
+    <TypeScriptCompile Include="Scripts\App\Stores\BaseStore.ts" />
+    <TypeScriptCompile Include="Scripts\App\Stores\BaseListStore.ts" />
+    <TypeScriptCompile Include="Scripts\App\Stores\LearnerStore.ts" />
+    <TypeScriptCompile Include="Scripts\App\Stores\LearnerListStore.ts" />
     <TypeScriptCompile Include="Scripts\App\Utils\NodeJS\Events\events.ts" />
     <TypeScriptCompile Include="Scripts\App\Utils\NodeJS\ObjectAssign\object-assign.ts" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\TypeScriptUtils.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -185,8 +191,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\npm.js" />
-    <TypeScriptCompile Include="Scripts\App\Utils\React\Flux\Dispatcher.ts" />
-    <TypeScriptCompile Include="Scripts\App\Utils\React\Flux\invariant.ts" />
+    <TypeScriptCompile Include="Scripts\App\Utils\ReactUtils\Flux\Dispatcher.ts" />
+    <TypeScriptCompile Include="Scripts\App\Utils\ReactUtils\Flux\invariant.ts" />
     <Content Include="Scripts\react\JSXTransformer-0.13.1.js" />
     <Content Include="Scripts\react\react-0.13.1.js" />
     <Content Include="Scripts\react\react-0.13.1.min.js" />
@@ -205,8 +211,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\ReferenceFilesCollector.cs" />
-    <Compile Include="Utils\ScriptBundleExt.cs" />
+    <Compile Include="Utils\BundleUtils\Filters\FileFilter.cs" />
+    <Compile Include="Utils\BundleUtils\Filters\FileInfo.cs" />
+    <Compile Include="Utils\BundleUtils\Filters\JavaScriptFilters.cs" />
+    <Compile Include="Utils\BundleUtils\ReferenceFilesCollector.cs" />
+    <Compile Include="Utils\BundleUtils\ScriptBundleExt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -215,7 +224,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\App\Utils\React\Flux\README.md" />
+    <Content Include="Scripts\App\Utils\ReactUtils\Flux\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,14 +235,15 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\App\Stores\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\App\Api\MyApi.ts" />
     <TypeScriptCompile Include="Scripts\App\Api\Utils\ajaxUtils.ts" />
     <TypeScriptCompile Include="Scripts\App\App.ts" />
     <TypeScriptCompile Include="Scripts\App\Dispatchers\AppDispatcher.ts" />
+    <TypeScriptCompile Include="Scripts\App\Utils\ReactUtils\ReactExt.ts" />
     <TypeScriptCompile Include="Scripts\typings\flux\flux.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\TypeScriptUtils.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react\react.d.ts" />
   </ItemGroup>
@@ -244,6 +254,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

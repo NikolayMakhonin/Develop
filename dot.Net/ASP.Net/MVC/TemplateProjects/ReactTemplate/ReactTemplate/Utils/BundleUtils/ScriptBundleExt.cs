@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Web.Optimization;
+using ReactTemplate.Utils.BundleUtils.Filters;
 
-namespace ReactTemplate.Utils
+namespace ReactTemplate.Utils.BundleUtils
 {
     public class ScriptBundleExt : ScriptBundle
     {
@@ -21,13 +22,18 @@ namespace ReactTemplate.Utils
 
         public Bundle IncludeWithReferences(params string[] virtualPaths)
         {
-            return IncludeWithReferences(virtualPaths, null);
+            return IncludeWithReferences(null, null, virtualPaths);
+        }
+
+        public Bundle IncludeWithReferences(FileFilter filter, params string[] virtualPaths)
+        {
+            return IncludeWithReferences(filter, null, virtualPaths);
         }   
 
         /// <param name="encoding">Default UTF8</param>
-        public Bundle IncludeWithReferences(string[] virtualPaths, Func<string, string> filter, Encoding encoding = null)
+        public Bundle IncludeWithReferences(FileFilter filter, Encoding encoding = null, params string[] virtualPaths)
         {
-            var mustIncludeFiles = new ReferenceFilesCollector(_includedFiles).IncludeFiles(virtualPaths, encoding);
+            var mustIncludeFiles = new ReferenceFilesCollector(_includedFiles, filter).IncludeFiles(virtualPaths, encoding);
             foreach (var virtualPath in mustIncludeFiles)
             {
                 base.Include(virtualPath);

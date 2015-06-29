@@ -1,6 +1,16 @@
-﻿///<reference path="../../typings/flux/flux.d.ts"/>
+﻿///<reference path="../../typings/TypeScriptUtils.d.ts"/>
 
 module App.Dispatchers {
-    import Flux = App.Utils.React.Flux;
-    export var AppDispatcher = Flux.Dispatcher;
+    import QuantizedEventHandler = mika.utils.Async.Events.QuantizedEventHandler;
+
+    export class AppDispatcher {
+        
+        private _events: QuantizedEventHandler<any> = new QuantizedEventHandler();
+
+        events(): QuantizedEventHandler<any> {
+            return this._events;
+        }
+
+    }
+
 }

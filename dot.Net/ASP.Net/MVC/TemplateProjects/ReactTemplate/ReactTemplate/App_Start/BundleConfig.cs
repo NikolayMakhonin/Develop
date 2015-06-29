@@ -1,5 +1,7 @@
 ﻿using System.Web.Optimization;
 using ReactTemplate.Utils;
+using ReactTemplate.Utils.BundleUtils;
+using ReactTemplate.Utils.BundleUtils.Filters;
 
 namespace ReactTemplate
 {
@@ -9,6 +11,7 @@ namespace ReactTemplate
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/js/vendors").Include(
+                "~/Scripts/TypeScriptUtils.js",
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/bootstrap.js"));
 
@@ -18,11 +21,12 @@ namespace ReactTemplate
                 ));
 
             bundles.Add(new ScriptBundleExt("~/bundles/js/app").IncludeWithReferences(
-                "~/Scripts/app/app.jsx"
-                ));
+                new FileFilterCollection(JavaScriptFilters.TypeScriptFilter, JavaScriptFilters.JsToJsxFilter).Filter,
+                "~/Scripts/App/App.ts"));
 
             bundles.Add(new StyleBundle("~/bundles/css/vendors").Include(
-                 "~/Content/bootstrap.css"));
+                 "~/Content/bootstrap.css",
+                 "~/Content/Site.css"));
         }
     }
 }

@@ -15,8 +15,8 @@ var App;
 (function (App) {
     var Utils;
     (function (Utils) {
-        var React;
-        (function (React) {
+        var ReactUtils;
+        (function (ReactUtils) {
             var Flux;
             (function (Flux) {
                 var Dispatcher = (function () {
@@ -140,8 +140,8 @@ var App;
                     return Dispatcher;
                 })();
                 Flux.Dispatcher = Dispatcher;
-            })(Flux = React.Flux || (React.Flux = {}));
-        })(React = Utils.React || (Utils.React = {}));
+            })(Flux = ReactUtils.Flux || (ReactUtils.Flux = {}));
+        })(ReactUtils = Utils.ReactUtils || (Utils.ReactUtils = {}));
     })(Utils = App.Utils || (App.Utils = {}));
 })(App || (App = {}));
 //# sourceMappingURL=Dispatcher.js.map

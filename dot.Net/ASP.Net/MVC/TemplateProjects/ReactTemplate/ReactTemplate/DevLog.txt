@@ -17,3 +17,6 @@ Update VS2013
 VS Extensions:
 * Web Essentials
   https://visualstudiogallery.msdn.microsoft.com/56633663-6799-41d7-9df7-0f2a504ca361
+
+
+Для компиляции фрагментов jsx в TypeScript, нужно оставлять комменты при компиляции TypeScript в JavaScript

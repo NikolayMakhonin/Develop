@@ -1,6 +1,15 @@
-﻿///<reference path="api/MyApi.ts"/>
+﻿///<reference path="../typings/react/react.d.ts"/>
+///<reference path="Components/Learner/LearnerEdit.ts"/>
 
 module App {
-    //export var x = () => { return this; };
+    var LearnerEdit = App.Components.Learner.LearnerEdit;
+
+    React.render(
+        <any>(() => {
+            /*<LearnerEdit name="MyApp" />*/
+        }),
+	    document.getElementById('container')
+    );
+
 }
  

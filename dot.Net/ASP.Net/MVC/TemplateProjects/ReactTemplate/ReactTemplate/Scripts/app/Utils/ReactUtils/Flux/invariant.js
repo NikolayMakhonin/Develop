@@ -23,8 +23,8 @@ var App;
 (function (App) {
     var Utils;
     (function (Utils) {
-        var React;
-        (function (React) {
+        var ReactUtils;
+        (function (ReactUtils) {
             var Flux;
             (function (Flux) {
                 function invariant(condition, format) {
@@ -52,8 +52,8 @@ var App;
                 }
                 Flux.invariant = invariant;
                 ;
-            })(Flux = React.Flux || (React.Flux = {}));
-        })(React = Utils.React || (Utils.React = {}));
+            })(Flux = ReactUtils.Flux || (ReactUtils.Flux = {}));
+        })(ReactUtils = Utils.ReactUtils || (Utils.ReactUtils = {}));
     })(Utils = App.Utils || (App.Utils = {}));
 })(App || (App = {}));
 //# sourceMappingURL=invariant.js.map
