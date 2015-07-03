@@ -168,12 +168,16 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="README.md" />
-    <TypeScriptCompile Include="Scripts\App\Components\Learner\LearnerEdit.ts" />
+    <TypeScriptCompile Include="Scripts\App\Actions\Person\PersonActions.ts" />
+    <TypeScriptCompile Include="Scripts\App\Api\Learner.ts" />
+    <TypeScriptCompile Include="Scripts\App\Components\Person\Learner\LearnerEdit.ts" />
     <Content Include="Scripts\App\Utils\NodeJS\Events\History.md" />
     <Content Include="Scripts\App\Utils\NodeJS\Events\Readme.md" />
     <Content Include="Scripts\App\Utils\NodeJS\ObjectAssign\readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
+    <TypeScriptCompile Include="Scripts\App\Components\Person\PhoneEditRow.ts" />
+    <TypeScriptCompile Include="Scripts\App\Components\Person\PhoneList.ts" />
     <TypeScriptCompile Include="Scripts\App\Stores\BaseStore.ts" />
     <TypeScriptCompile Include="Scripts\App\Stores\BaseListStore.ts" />
     <TypeScriptCompile Include="Scripts\App\Stores\LearnerStore.ts" />
@@ -199,6 +203,7 @@
     <Content Include="Scripts\react\react-with-addons-0.13.1.js" />
     <Content Include="Scripts\react\react-with-addons-0.13.1.min.js" />
     <Content Include="Web.config" />
+    <TypeScriptCompile Include="Scripts\typings\TypeScriptUtils.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -242,8 +247,8 @@
     <TypeScriptCompile Include="Scripts\App\App.ts" />
     <TypeScriptCompile Include="Scripts\App\Dispatchers\AppDispatcher.ts" />
     <TypeScriptCompile Include="Scripts\App\Utils\ReactUtils\ReactExt.ts" />
+    <TypeScriptCompile Include="Scripts\TypeScriptUtils.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\flux\flux.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\TypeScriptUtils.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react\react.d.ts" />
   </ItemGroup>

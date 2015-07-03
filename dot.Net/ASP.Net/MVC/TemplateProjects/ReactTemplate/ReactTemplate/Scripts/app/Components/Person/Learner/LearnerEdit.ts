@@ -1,12 +1,13 @@
-﻿///<reference path="../../../typings/react/react.d.ts"/>
-///<reference path="../../Utils/ReactUtils/ReactExt.ts"/>
+﻿///<reference path="../../../../typings/react/react.d.ts"/>
+///<reference path="../../../Utils/ReactUtils/ReactExt.ts"/>
+///<reference path="../PhoneList.ts"/>
 
-module App.Components.Learner {
+module App.Components.Person.Learner {
     import ReactComponentSpec = React.ReactComponentSpec;
     import PropTypeValidatorOptions = React.PropTypeValidatorOptions;
-    import ReactUtils = App.Utils.ReactUtils;
     import ReactExt = App.Utils.ReactUtils.ReactExt; 
     
+    var PhoneList = Person.PhoneList;
     //SubsectorsActionCreators = require('../actions/subsectors_actions');
     //ItemErrorsBlock = require('./item_errors_block');
 
@@ -26,7 +27,6 @@ module App.Components.Learner {
         }
 
         componentDidMount() {
-            var x = 0;
         }
 
         render(): React.ReactElement<any, any> {
@@ -106,25 +106,11 @@ module App.Components.Learner {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-4">
-                                <h3>
-                                Телефоны
-                                &nbsp;
-                                <button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                </h3>
-                                <table class="table vcenter borderless">
-                                    <thead>
-                                        <tr><th>Телефон</th><th>Операции</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>8-888-888-8888</td><td><button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <PhoneList class="col-md-4"/>
                         </div>
                     </div>
                 </div>
-            */});
+                */});
         }
     }
 

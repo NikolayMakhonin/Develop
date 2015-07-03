@@ -1,0 +1,121 @@
+﻿///<reference path="../../typings/TypeScriptUtils.d.ts"/>
+//// <reference path="../../../../../../../../../../../_SVN/remote/NetPro/JavaScript/TypeScriptUtils/TypeScriptUtils/mika/datamodel/contracts/IDataBaseAsync.ts" />
+//// <reference path="../../../../../../../../../../../_SVN/remote/NetPro/JavaScript/TypeScriptUtils/TypeScriptUtils/mika/datamodel/contracts/IDataBase.ts" />
+module App.Api {
+    //import IDataBaseAsync = mika.datamodel.contracts.IDataBaseAsync;
+    //import IDataBase = mika.datamodel.contracts.IDataBase;
+    import StringBuilder = mika.utils.Strings.StringBuilder;
+    import AjaxUtils = App.Api.Utils.AjaxUtils; //private static mergeArrays<T>(srcArr: T[], dstArr: T[], notAddIfExists: boolean = true): T[] {
+        //    if (dstArr == undefined) return srcArr == undefined ? undefined : srcArr.slice();
+        //    if (srcArr == undefined) return dstArr;
+        //    var len = srcArr.length;
+        //    for (var i = 0; i < len; i++) {
+        //        var item = srcArr[i];
+        //        if (notAddIfExists && (dstArr.indexOf(item) >= 0)) continue;
+        //        dstArr.push(item);
+        //    }
+        //    return dstArr;
+        //}
+
+        //private static mergeStringArrays(srcArr: string[], dstArr: string[], notAddIfExists: boolean = true, ignoreCase: boolean = true): string[] {
+        //    if (dstArr == undefined) return srcArr == undefined ? undefined : srcArr.slice();
+        //    if (srcArr == undefined) return dstArr;
+        //    var len = srcArr.length;
+        //    for (var i = 0; i < len; i++) {
+        //        var item = srcArr[i].trim();
+        //        if (ignoreCase) item = item.toLowerCase();
+        //        if (notAddIfExists && (dstArr.indexOf(item) >= 0)) continue;
+        //        dstArr.push(item);
+        //    }
+        //    return dstArr;
+        //}
+
+        //constructor(srcParams?: ODataParams[]) {
+        //    if (srcParams != undefined) {
+        //        this.merge(srcParams);
+        //    }    
+        //}
+
+        //merge(params: ODataParams[]) {
+        //    if (params == undefined) return;
+        //    var len = params.length;
+        //    for (var i = 0; i < len; i++) {
+        //        var oDataParams = params[i];
+        //        this.select = ODataParams.mergeStringArrays(this.expand, oDataParams.expand);
+        //        this.expand = ODataParams.mergeStringArrays(this.expand, oDataParams.expand);
+        //    }
+        //}
+        
+        //private fillExpand(select: string[], expand: string[]) {
+        //    if (select == undefined) return;
+        //    var len = select.length;
+        //    for (var i = 0; i < len; i++) {
+        //        var field = select[i];
+        //        if (field.indexOf('/')) {
+        //            if ()
+        //        }
+        //    }
+        //}
+
+
+    class ODataParams {
+        $select: string[];
+        $expand: string[];
+
+        toString() {
+            var sb = new StringBuilder();
+            var oDataParams = this;
+            for (var key in oDataParams) {
+                if (oDataParams.hasOwnProperty(key)) {
+                    var value = oDataParams[key];
+                    sb.append(key).append('=');
+                    if (value.constructor === Array) sb.append(value.join(','));
+                    else sb.append(value);
+                }
+            }
+            return sb.toString();
+        }
+    }
+
+    interface IAjaxRequest {
+        settings: JQueryAjaxSettings;
+        done?: JQueryPromiseCallback<any>;    
+        fail?: JQueryPromiseCallback<any>;    
+    }
+
+    class BaseApi {
+        getText() {
+            return $.ajax({
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                url: "/api/MyApi/getText",
+                data: null,
+                dataType: 'json',
+                crossDomain: true,
+                error: AjaxUtils.errorDefaultHandler
+            }).done(AjaxUtils.successNotHandled);
+        }
+    }
+
+    //class BaseODataApi<TItem> implements IDataBase<TItem, any, any> {
+    //    private _apiUrl: string;
+
+    //    constructor(apiUrl: string) {
+    //        this._apiUrl = apiUrl;
+    //    }
+
+    //    Add(item): boolean { throw new Error("Not implemented"); }
+
+    //    Remove(item): boolean { throw new Error("Not implemented"); }
+
+    //    Replace(item): boolean { throw new Error("Not implemented"); }
+
+    //    Update(item): boolean { throw new Error("Not implemented"); }
+
+    //    Select(query: ODataParams) {
+    //        var requestUrl = [this._apiUrl, "?", query.toString()].join('');
+    //    }
+
+    //    dispose() {}
+    //}
+} 
