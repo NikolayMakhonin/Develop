@@ -5,8 +5,6 @@ var App;
 (function (App) {
     var Api;
     (function (Api) {
-        //import IDataBaseAsync = mika.datamodel.contracts.IDataBaseAsync;
-        //import IDataBase = mika.datamodel.contracts.IDataBase;
         var StringBuilder = mika.utils.Strings.StringBuilder;
         var AjaxUtils = App.Api.Utils.AjaxUtils; //private static mergeArrays<T>(srcArr: T[], dstArr: T[], notAddIfExists: boolean = true): T[] {
         //    if (dstArr == undefined) return srcArr == undefined ? undefined : srcArr.slice();
@@ -68,7 +66,7 @@ var App;
                         if (value.constructor === Array)
                             sb.append(value.join(','));
                         else
-                            sb.append(value);
+                            sb.append(value.toString());
                     }
                 }
                 return sb.toString();
@@ -90,6 +88,29 @@ var App;
                 }).done(AjaxUtils.successNotHandled);
             };
             return BaseApi;
+        })();
+        var BaseODataApi = (function () {
+            function BaseODataApi(apiUrl) {
+                this._apiUrl = apiUrl;
+            }
+            BaseODataApi.prototype.Add = function (item) {
+                throw new Error("Not implemented");
+            };
+            BaseODataApi.prototype.Remove = function (item) {
+                throw new Error("Not implemented");
+            };
+            BaseODataApi.prototype.Replace = function (item) {
+                throw new Error("Not implemented");
+            };
+            BaseODataApi.prototype.Update = function (item) {
+                throw new Error("Not implemented");
+            };
+            BaseODataApi.prototype.Select = function (query) {
+                var requestUrl = [this._apiUrl, "?", query.toString()].join('');
+            };
+            BaseODataApi.prototype.dispose = function () {
+            };
+            return BaseODataApi;
         })();
     })(Api = App.Api || (App.Api = {}));
 })(App || (App = {}));

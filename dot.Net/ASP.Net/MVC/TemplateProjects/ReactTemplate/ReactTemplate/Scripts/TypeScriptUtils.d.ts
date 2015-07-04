@@ -1,3 +1,5 @@
+/// <reference path="../../../../../../../../../_SVN/remote/NetPro/JavaScript/TypeScriptUtils/TypeScriptUtils/libs/typings/jasmine/jasmine.d.ts" />
+/// <reference path="../../../../../../../../../_SVN/remote/NetPro/JavaScript/TypeScriptUtils/TypeScriptUtils/libs/typings/jasmine/karma-jasmine.d.ts" />
 declare module mika.utils.Events {
     interface IEventArgs {
     }
@@ -1194,6 +1196,292 @@ declare module mika.utils.List {
         next(): T;
     }
 }
+declare module mika.datamodel.contracts {
+    import IDisposable = utils.Contracts.Patterns.IDisposable;
+    interface IDataBase<TItem, TSelectQuery, TQueryResult> extends IDisposable {
+        /** Equivalent SQL: INSERT OR IGNORE */
+        Add(item: TItem, callback?: (result: boolean) => void): void;
+        /** Equivalent SQL: DELETE IF EXISTS */
+        Remove(item: TItem, callback?: (result: boolean) => void): void;
+        /** Equivalent SQL: INSERT OR REPLACE */
+        Replace(item: TItem, callback?: (result: boolean) => void): void;
+        /** Equivalent SQL: INSERT OR UPDATE */
+        Update(item: TItem, callback?: (result: boolean) => void): void;
+        /** Equivalent SQL: SELECT */
+        Select(query: TSelectQuery, callback: (result: TQueryResult) => void): void;
+    }
+}
+declare module mika.datamodel.contracts {
+    import WaitTimerQuantCallBack = mika.utils.Async.WaitTimerQuantCallBack;
+    interface IDataBaseAsync<TItem, TSelectQuery, TQueryResult> extends IDataBase<TItem, TSelectQuery, TQueryResult> {
+        ForceSynchronize(suspendCurrentThread?: boolean, timeOut?: number, callback?: WaitTimerQuantCallBack): any;
+        ClearActionList(): any;
+        CountActions(): number;
+    }
+}
+declare module mika.datamodel.contracts {
+    interface IObjectMerger<T> {
+        merge(oldItem: T, newItem: T): T;
+    }
+}
+declare module mika.datamodel {
+    import IDataBaseAsync = datamodel.contracts.IDataBaseAsync;
+    import IComparator = utils.List.IComparator;
+    import IObjectMerger = datamodel.contracts.IObjectMerger;
+    import WaitTimerQuantCallBack = mika.utils.Async.WaitTimerQuantCallBack;
+    /** !! Внимание: для корректной работы, не забудь определить методы hashcode и compareTo в классе TItem, либо передать эти функции конструктору (itemsComparator, getHashCode) */
+    class BaseDataBaseAsyncSaver<TItem, TSelectQuery, TQueryResult> implements IDataBaseAsync<TItem, TSelectQuery, TQueryResult> {
+        private onlyForceSave;
+        private _deferredSynchronize;
+        protected _dataBaseModel: IDataBaseAsync<TItem, TSelectQuery, TQueryResult>;
+        private _id;
+        private _newActions;
+        private _processedItems;
+        private _processedQueries;
+        private _items;
+        private _queries;
+        private _itemsMerger;
+        private _autoSynchronize;
+        private _maxAsyncOperations;
+        private static _globalMaxAsyncOperations;
+        private static _globalCurrentAsyncOperations;
+        private _maxTryCount;
+        private _synchronizePause;
+        constructor(dataBaseModel: IDataBaseAsync<TItem, TSelectQuery, TQueryResult>, itemsMerger: IObjectMerger<TItem>, itemsComparator?: IComparator<TItem>, getHashCode?: (TItem) => number, selectQueryComparator?: IComparator<TSelectQuery>, getSelectQueryHashCode?: (TSelectQuery) => number, autoSynchronize?: boolean);
+        private addNewAction(action);
+        private _itemsChangedListener;
+        private globalCurrentAsyncOperationsDecreaseListener;
+        private static _globalCurrentAsyncOperationsDecrease;
+        getNotHandledCount(): number;
+        getAutoSynchronize(): boolean;
+        setAutoSynchronize(value: boolean): void;
+        getSynchronizeInterval(): number;
+        setSynchronizeInterval(value: number): void;
+        getMaxAsyncOperations(): number;
+        setMaxAsyncOperations(value: number): void;
+        static getGlobalMaxAsyncOperations(): number;
+        static setGlobalMaxAsyncOperations(value: number): void;
+        getMaxTryCount(): number;
+        setMaxTryCount(value: number): void;
+        getCurrentAsyncOperationsCount(): number;
+        static getGlobalCurrentAsyncOperationsCount(): number;
+        ClearActionList(): void;
+        CountActions(): number;
+        private allowNewProcessItem();
+        private resultHandler<TItem2, TResult2>(result, action, precessedItems, items, addHandler, updateHandler, selectHandler, defaultHandler?);
+        private resultMergeWithDefault;
+        private resultMergeWithUpdate;
+        private resultMergeAdd;
+        private synchronize;
+        Add(item: TItem, callback: (result: boolean) => void): void;
+        Remove(item: TItem, callback: (result: boolean) => void): void;
+        Replace(item: TItem, callback: (result: boolean) => void): void;
+        Update(item: TItem, callback: (result: boolean) => void): void;
+        Select(query: TSelectQuery, callback: (result: TQueryResult) => void): void;
+        ForceSynchronize(suspendCurrentThread?: boolean, timeOut?: number, callback?: WaitTimerQuantCallBack): void;
+        ForceDeferredSynchronize(suspendCurrentThread?: boolean, timeOut?: number, callback?: WaitTimerQuantCallBack): void;
+        Synchronize(): void;
+        protected disposed: boolean;
+        dispose(suspendCurrentThread?: boolean, abortTimeOut?: number, callBack?: () => void): void;
+    }
+}
+declare module mika.utils.Serialization {
+    class SerializationUtils {
+        static base64ToBinary(base64: string): string;
+        static binaryToBase64(data: string, startIndex?: number, length?: number): string;
+        static stringToBinaryUTF8(str: string): string;
+        static binaryUTF8ToString(data: string, startIndex?: number, length?: number): string;
+    }
+}
+interface Math {
+    MAX_INT8: number;
+    MIN_INT8: number;
+    MAX_UINT8: number;
+    MAX_INT16: number;
+    MIN_INT16: number;
+    MAX_UINT16: number;
+    MAX_INT32: number;
+    MIN_INT32: number;
+    MAX_UINT32: number;
+    MAX_Float32: number;
+    MIN_Float32: number;
+    MAX_Float64: number;
+    MIN_Float64: number;
+    pow2(x: number): number;
+    log2(x: number): number;
+    random(max?: number): number;
+    random(min?: number, max?: number): number;
+    randomInt(max?: number): number;
+    randomInt(min?: number, max?: number): number;
+}
+declare module mika.utils {
+}
+declare module mika.utils.UUID {
+    import IComparable = mika.utils.List.IComparable;
+    class UUID implements IComparable<UUID> {
+        private static generate();
+        private static checkUUIDRegEx;
+        static isValid(uuidStr: string): boolean;
+        private _uuidStr;
+        private _binaryStr;
+        constructor(binaryStr?: string);
+        static parse(uuidStr: string, validate?: boolean): UUID;
+        compareTo(uuid: UUID): number;
+        equals(uuid: UUID): boolean;
+        toBinary(): string;
+        toString(): string;
+    }
+}
+declare module mika.utils.Serialization {
+    class NumberSerializer {
+        static packI8(n: number): string;
+        static unpackI8(data: string, startIndex?: number): number;
+        static packU8(n: number): string;
+        static unpackU8(data: string, startIndex?: number): number;
+        static packU8Clamped(n: number): string;
+        static packI16(n: number): string;
+        static unpackI16(data: string, startIndex?: number): number;
+        static packU16(n: number): string;
+        static unpackU16(data: string, startIndex?: number): number;
+        static packI32(n: number): string;
+        static unpackI32(data: string, startIndex?: number): number;
+        static packU32(n: number): string;
+        static unpackU32(data: string, startIndex?: number): number;
+        static packF32: (v: number) => string;
+        static unpackF32: (b: string, startIndex?: number) => number;
+        static packF64: (v: number) => string;
+        static unpackF64: (b: string, startIndex?: number) => number;
+    }
+}
+declare module mika.utils.Serialization {
+    import UUID = mika.utils.UUID.UUID;
+    import ICollection = mika.utils.List.ICollection;
+    import IDictionary = mika.utils.List.IDictionary;
+    interface ReadItemFunc<TItem> extends Function {
+        (): TItem;
+    }
+    class BinaryReader {
+        constructor(data: string);
+        readFloat32: (nullable?: boolean) => number;
+        readFloat64: (nullable?: boolean) => number;
+        readInt8: (nullable?: boolean) => number;
+        readUInt8: (nullable?: boolean) => number;
+        readInt16: (nullable?: boolean) => number;
+        readUInt16: (nullable?: boolean) => number;
+        readInt32: (nullable?: boolean) => number;
+        readUInt32: (nullable?: boolean) => number;
+        readBoolean: () => boolean;
+        readStringUTF8: (nullable?: boolean) => string;
+        readBinaryData: (nullable?: boolean) => string;
+        readUUID: (nullable?: boolean) => UUID;
+        readToCollection: <T>(collection: ICollection<T>, readItem: ReadItemFunc<T>, nullableItems?: boolean) => number;
+        readCollection: <T>(addItem: (item: T) => any, readItem: ReadItemFunc<T>, initCount?: (count: number) => any, nullableItems?: boolean) => number;
+        readToArray: <T>(array: T[], readItem: ReadItemFunc<T>, nullableItems?: boolean) => number;
+        readArray: <T>(readItem: ReadItemFunc<T>, nullableItems?: boolean) => Array<T>;
+        readToDictionary: <TKey, TValue>(dictionary: IDictionary<TKey, TValue>, readKey: ReadItemFunc<TKey>, readValue: ReadItemFunc<TValue>, nullableKeys?: boolean, nullableValues?: boolean) => number;
+        readToObject: (object: {}) => number;
+        readObject: () => any;
+        readAny: () => any;
+    }
+}
+declare module mika.utils.Serialization {
+    import UUID = mika.utils.UUID.UUID;
+    import ICollection = mika.utils.List.ICollection;
+    import IDictionary = mika.utils.List.IDictionary;
+    interface WriteItemAction<TItem> extends Function {
+        (item: TItem): any;
+    }
+    class BinaryBuilder {
+        constructor();
+        writeFloat32: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeFloat64: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeInt8: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeUInt8: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeInt16: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeUInt16: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeInt32: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeUInt32: (value: number, nullable?: boolean) => BinaryBuilder;
+        writeBoolean: (value: boolean) => BinaryBuilder;
+        writeStringUTF8: (value: string, nullable?: boolean) => BinaryBuilder;
+        writeBinaryData: (data: string, nullable?: boolean) => BinaryBuilder;
+        writeUUID: (uuid: UUID, nullable?: boolean) => BinaryBuilder;
+        writeCollection: <T>(collection: ICollection<T>, writeItem: WriteItemAction<T>, nullableItems?: boolean) => BinaryBuilder;
+        writeArray: <T>(array: T[], writeItem: WriteItemAction<T>, nullableItems?: boolean) => BinaryBuilder;
+        writeDictionary: <TKey, TValue>(dictionary: IDictionary<TKey, TValue>, writeKey: WriteItemAction<TKey>, writeValue: WriteItemAction<TValue>, nullableKeys?: boolean, nullableValues?: boolean) => BinaryBuilder;
+        writeObject: (object: {}, deepWrite: boolean, writefloat64?: boolean) => BinaryBuilder;
+        writeAny: (value: any, deepWrite: boolean, writefloat64?: boolean) => boolean;
+        toString: () => string;
+    }
+}
+declare module mika.utils.Serialization {
+    interface IBinarySerializable {
+        Serialize(writer: BinaryBuilder): any;
+        DeSerialize(reader: BinaryReader): any;
+    }
+}
+declare module mika.utils.Contracts.Delegates {
+    interface Func<TResult> extends Function {
+        (): TResult;
+    }
+}
+declare module mika.utils.Serialization {
+    import IComparable = utils.List.IComparable;
+    import IIterable = utils.List.IIterable;
+    import UUID = utils.UUID.UUID;
+    import Func = utils.Contracts.Delegates.Func;
+    import IBinarySerializable = Serialization.IBinarySerializable;
+    import IIterator = utils.List.IIterator;
+    import IEventHandler = utils.Events.IEventHandler;
+    import EventArgs = utils.Events.EventArgs;
+    import ISet = utils.List.ISet;
+    class TagCombine implements IComparable<TagCombine>, IBinarySerializable, IIterable<UUID> {
+        private _ids;
+        constructor(ids: UUID[]);
+        compareTo(obj: Object): number;
+        hashCode(): number;
+        equals(o: Object): boolean;
+        private static _currentVersion;
+        Serialize(writer: BinaryBuilder): void;
+        DeSerialize(reader: BinaryReader): void;
+        IsSubTags(combine: TagCombine): boolean;
+        AddTag(id: UUID): void;
+        toString(): string;
+        iterator(): IIterator<UUID>;
+        getIds(): UUID[];
+    }
+    class TypeIdentityList {
+        private _typeIdConstructors;
+        private _typeConstructors;
+        private _typeToId;
+        private _idToType;
+        private _typeToTags;
+        private _typeIdToTags;
+        private _tagsToType;
+        private _types;
+        private _typesWithConstructor;
+        constructor();
+        getTypes(): ISet<Class>;
+        getTypesWithConstructor(): ISet<Class>;
+        AddType(type: Class, id: UUID, _constructor: Func<Object>): boolean;
+        private addTagCombine(type, id);
+        CreateInstanceByType(type: Class): Object;
+        CreateInstanceByTags(tags: IIterable<UUID>): Object;
+        GetConstructorByTags(tags: IIterable<UUID>): Func<Object>;
+        GetConstructorByType(type: Class): Func<Object>;
+        private getSubTypesIds(tags, ref_tagCombine);
+        GetSubTypes(baseType: Class, withConstructor: boolean): ISet<Class>;
+        GetSubTypesFromTags(tags: IIterable<UUID>, withConstructor: boolean): ISet<Class>;
+        GetTypeFromTag(tag: UUID): Class;
+        GetTypeFromTags(tags: IIterable<UUID>): Class;
+        private idsToTypes(ids);
+        GetTypeTags(type: Class): UUID[];
+        GetTypeTag(type: Class): UUID;
+        private _types_CollectionChanged_listener;
+        private _types_CollectionChanged(sender, e);
+        private _TypesChanged;
+        TypesChanged(): IEventHandler<EventArgs>;
+    }
+}
 declare module mika.utils.Contracts.Delegates {
     interface Action1<T1> extends Function {
         (v1: T1): any;
@@ -1215,11 +1503,6 @@ declare module mika.utils.Contracts.Delegates {
     }
 }
 declare module mika.utils.Contracts.Delegates {
-    interface Func<TResult> extends Function {
-        (): TResult;
-    }
-}
-declare module mika.utils.Contracts.Delegates {
     interface Func3<T1, T2, T3, TResult> extends Function {
         (v1: T1, v2: T2, v3: T3): TResult;
     }
@@ -1232,5 +1515,49 @@ declare module mika.utils.Contracts.Delegates {
 declare module mika.utils.Contracts.Delegates {
     interface FuncN<TArgs, TResult> extends Function {
         (...args: TArgs[]): TResult;
+    }
+}
+declare var fail: (message?: string) => any;
+declare var DEBUG_MODE: boolean;
+declare module mika.utils.Tests {
+    class TestUtils {
+        private static _debugLog;
+        static debugLogClear(): void;
+        private static debugLog(message);
+        static STRIP_COMMENTS: RegExp;
+        static ARGUMENT_NAMES: RegExp;
+        static getFuncParamNames(func: Function): string[];
+        /** Чтобы отлаживать тесты в браузере, запрещаю ReSharper-у останавливать сервер */
+        static DisableResharperStopping(): void;
+        static StopTestByFirstFailure(): void;
+        static showLastThreads(): void;
+        private static consoleLog;
+        private static consoleClear;
+        static Init(): void;
+    }
+}
+declare module mika.utils.TimeUtils {
+    class TimeSpanFormat {
+        private _parts;
+        private _patterns;
+        constructor(patterns: string[], parts: TimeSpanPart[]);
+        format(timeSpan: TimeSpan): string;
+    }
+}
+declare module mika.utils.TimeUtils {
+    enum TimeSpanPart {
+        /** 1 Year = 12 Months = 360 days */
+        Year = 0,
+        /** 1 Month = 30 days */
+        Month = 1,
+        Week = 2,
+        Day = 3,
+        DayOfMonth = 4,
+        DayOfWeek = 5,
+        Hour = 6,
+        Minute = 7,
+        Second = 8,
+        Millisecond = 9,
+        Tick = 10,
     }
 }
