@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
-using ReactTemplate.Utils;
-using ReactTemplate.Utils.BundleUtils;
+using AspNetUtils.BundleUtils;
+using AspNetUtils.BundleUtils.Filters;
 using ReactTemplate.Utils.BundleUtils.Filters;
 
 namespace ReactTemplate

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using AspNetUtils.Configs;
 using Newtonsoft.Json.Serialization;
+using ReactTemplate.Models;
 
 namespace ReactTemplate
 {
@@ -22,6 +24,7 @@ namespace ReactTemplate
                 defaults: new { id = RouteParameter.Optional }
             );
         
+            ODataApiConfig.Register(config, SchoolEntitiesResolver.Instance);
             //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
     }

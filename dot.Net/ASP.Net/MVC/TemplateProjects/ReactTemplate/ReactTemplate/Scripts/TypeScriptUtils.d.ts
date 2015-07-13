@@ -1,3 +1,4 @@
+/// <reference path="../../../../../../../../../_SVN/remote/NetPro/JavaScript/TypeScriptUtils/TypeScriptUtils/libs/typings/jquery/jquery.d.ts" />
 /// <reference path="../../../../../../../../../_SVN/remote/NetPro/JavaScript/TypeScriptUtils/TypeScriptUtils/libs/typings/jasmine/jasmine.d.ts" />
 /// <reference path="../../../../../../../../../_SVN/remote/NetPro/JavaScript/TypeScriptUtils/TypeScriptUtils/libs/typings/jasmine/karma-jasmine.d.ts" />
 declare module mika.utils.Events {
@@ -96,46 +97,6 @@ declare module mika.utils.Events {
         dispose(): void;
     }
 }
-declare module mika.logger {
-    interface ILog {
-        v(tag: String, msg: String, exception?: Object): number;
-        d(tag: String, msg: String, exception?: Object): number;
-        i(tag: String, msg: String, exception?: Object): number;
-        w(tag: String, msg: String, exception?: Object): number;
-        e(tag: String, msg: String, exception?: Object): number;
-        wtf(tag: String, msg: String, exception?: Object): number;
-        getStackTraceString(exception: Object): String;
-        println(priority: number, tag: String, msg: String): number;
-    }
-}
-declare module mika.logger {
-    class LogConsole implements ILog {
-        v(tag: String, msg: String, exception?: Object): number;
-        d(tag: String, msg: String, exception?: Object): number;
-        i(tag: String, msg: String, exception?: Object): number;
-        w(tag: String, msg: String, exception?: Object): number;
-        e(tag: String, msg: String, exception?: Object): number;
-        wtf(tag: String, msg: String, exception?: Object): number;
-        getStackTraceString(exception: Object): String;
-        println(priority: number, tag: String, msg: String): number;
-        private log(funcName, ...objects);
-    }
-}
-declare module mika.logger {
-    class Log {
-        static currentLogger: ILog;
-        static tagPrefix: string;
-        private static ctor;
-        static v(tag: string, msg: string, exception?: Object): number;
-        static d(tag: string, msg: string, exception?: Object): number;
-        static i(tag: string, msg: string, exception?: Object): number;
-        static w(tag: string, msg: string, exception?: Object): number;
-        static e(tag: string, msg: string, exception?: Object): number;
-        static wtf(tag: string, msg: string, exception?: Object): number;
-        static getStackTraceString(exception: Object): string;
-        static println(priority: number, tag: string, msg: string): number;
-    }
-}
 declare module mika.utils.Events {
     class EventHandlerTemplate<TEventArgs extends EventArgs, TEventListener extends IBaseEventListener<any>> extends EventHandlerBase<TEventArgs, TEventListener> {
         protected listeners: TEventListener[];
@@ -215,12 +176,16 @@ declare module mika.utils.Strings {
     class StringBuilder {
         constructor();
         isEmpty: () => boolean;
+        prepend: (str: string) => StringBuilder;
         append: (str: string) => StringBuilder;
         clear: () => void;
         toString: () => string;
     }
-    class StringUtils {
-        static Join(separator: string, list: IIterable<any>): string;
+    module StringUtils {
+        function Join(separator: string, list: IIterable<any>): string;
+        function parseFuncArguments(func: any): string[];
+        function parseFunctionName(fun: any): any;
+        function parseFunctionBody(fun: any): any;
     }
 }
 declare module mika.utils.Async.Quants {
@@ -237,6 +202,131 @@ declare module mika.utils.Async.Quants {
     class QuantsSintaxException extends QuantsException {
         name: string;
         constructor(message?: string, innerError?: any, scopeStack?: Scope[]);
+    }
+}
+interface String {
+    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
+    clone<T>(deep?: boolean): T;
+}
+interface Number {
+    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
+    clone<T>(deep?: boolean): T;
+}
+interface Boolean {
+    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
+    clone<T>(deep?: boolean): T;
+}
+interface Date {
+    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
+    clone<T>(deep?: boolean): T;
+}
+interface Array<T> {
+    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
+    clone(deep?: boolean): T;
+}
+interface Function {
+    subClassOf(baseClass: Function): boolean;
+    getBaseClass(): Function;
+}
+interface Class extends Function {
+}
+declare var __extends: (_class: any, baseClass: any) => void;
+declare module mika.utils {
+    module ClassUtils {
+        function getClassName(): any;
+        /** Клонирует объект, но не клонирует структуру наследования, все свойства. Не клонирует методы, так что следи за тем, чтобы свойства типа функция, не попали в клон, иначе они могут изменить оригинальный объект */
+        function clone(object: any, deep?: boolean): any;
+        /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
+        function subClassOf(Class: Function, baseClass: Function): boolean;
+        function ArrayConstructor(length?: number, fillValue?: any): () => any[];
+        function ConstConstructor(initValue: any): () => any;
+    }
+}
+declare module mika.utils.List {
+    interface IComparable<T> {
+        compareTo(o: T): number;
+    }
+}
+interface String {
+    hashCode(): number;
+}
+interface Boolean {
+    hashCode(): number;
+}
+interface Number {
+    hashCode(): number;
+}
+declare module mika.utils {
+    module CompareUtils {
+        function identityHashCode(object: any): number;
+        function hashCode(object: any): any;
+        function equals(o1: any, o2: any): boolean;
+        /** Only for: number, strings, boolean and not (string, boolean) !! not null or undefined*/
+        function CompareSimple(o1: any, o2: any): number;
+        function EqualsSimple(o1: any, o2: any): boolean;
+        function CompareTypes(f1: Class, f2: Class): number;
+        function CompareString(s1: string, s2: string, ignoreCase?: boolean): number;
+        function CompareStringIgnoreCase(s1: string, s2: string): number;
+        function EqualsString(s1: string, s2: string, ignoreCase?: boolean): boolean;
+        function EqualsStringIgnoreCase(s1: string, s2: string): boolean;
+        function CompareObjects<T>(o1: T, o2: T): number;
+    }
+}
+declare module mika.utils.List {
+    class ArrayIterator<T> implements mika.utils.List.IIterator<T> {
+        private _index;
+        private _array;
+        constructor(array: T[]);
+        hasNext(): boolean;
+        next(): T;
+    }
+}
+declare module mika.utils.List {
+    interface ICollection<T> extends List.IIterable<T> {
+        add(item: T): boolean;
+        remove(item: T): boolean;
+        size(): number;
+        contains(item: T): boolean;
+        clear(): any;
+    }
+}
+declare module mika.utils.List {
+    interface ISet<T> extends List.ICollection<T> {
+        get(index: number): T;
+        set(index: number, value: T): T;
+        insert(index: number, item: T): boolean;
+        removeAt(index: number): T;
+        indexOf(item: T): number;
+        toArray<T2 extends T>(): T2[];
+    }
+}
+declare module mika.utils.List {
+    interface IComparator<T> extends Function {
+        (o1: T, o2: T): number;
+    }
+}
+interface Array<T> extends mika.utils.List.ISet<T> {
+    copyOf<T2>(index?: number, count?: number): T2[];
+    copyTo<T2>(dest: T2[], srcIndex?: number, srcCount?: number, dstIndex?: number): any;
+    binarySearch(item: T, comparator?: mika.utils.List.IComparator<T>, startIndex?: number, length?: number): number;
+    fill(value: T, startIndex?: number, count?: number): any;
+    addArray<T2 extends T>(array: T2[]): any;
+}
+declare module mika.utils.List {
+}
+declare module mika.utils.Async.Quants {
+    class QuantsFactory {
+        static Scope(quantList: IQuantFunc[]): IQuant;
+        static Cycle(init: () => any, condition: () => boolean, iterator: () => any, bodyList: IQuantFunc[]): IQuantFunc[];
+        static Try(tryList: IQuantFunc[]): ITryQuant;
+        static Func<TResult>(bodyList: IQuantFunc[]): IFuncQuant<TResult>;
+    }
+    interface IQuantProcessor {
+        _BREAK: IQuantFunc;
+        _CONTINUE: IQuantFunc;
+        _RETURN: IQuantFunc;
+        _CATCH: IQuantFunc;
+        _FINALLY: IQuantFunc;
     }
 }
 declare module mika.utils.Async.Quants {
@@ -558,73 +648,6 @@ declare module mika.utils.Async {
         dispose(suspendCurrentThread?: boolean, abortTimeOut?: number, callBack?: () => void): void;
     }
 }
-interface String {
-    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
-    clone<T>(deep?: boolean): T;
-}
-interface Number {
-    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
-    clone<T>(deep?: boolean): T;
-}
-interface Boolean {
-    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
-    clone<T>(deep?: boolean): T;
-}
-interface Date {
-    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
-    clone<T>(deep?: boolean): T;
-}
-interface Array<T> {
-    /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
-    clone(deep?: boolean): T;
-}
-interface Function {
-    subClassOf(baseClass: Function): boolean;
-    getBaseClass(): Function;
-}
-interface Class extends Function {
-}
-declare var __extends: (_class: any, baseClass: any) => void;
-declare module mika.utils {
-    module ClassUtils {
-        function getClassName(): any;
-        /** Не рекомендуется клонировать объеты этим методом, разве что для отладки и тестирования */
-        function clone<T>(object: Object, deep?: boolean): T;
-        function subClassOf(Class: Function, baseClass: Function): boolean;
-        function ArrayConstructor(length?: number, fillValue?: any): () => any[];
-        function ConstConstructor(initValue: any): () => any;
-    }
-}
-declare module mika.utils.List {
-    interface IComparable<T> {
-        compareTo(o: T): number;
-    }
-}
-interface String {
-    hashCode(): number;
-}
-interface Boolean {
-    hashCode(): number;
-}
-interface Number {
-    hashCode(): number;
-}
-declare module mika.utils {
-    module CompareUtils {
-        function identityHashCode(object: any): number;
-        function hashCode(object: any): any;
-        function equals(o1: any, o2: any): boolean;
-        /** Only for: number, strings, boolean and not (string, boolean) !! not null or undefined*/
-        function CompareSimple(o1: any, o2: any): number;
-        function EqualsSimple(o1: any, o2: any): boolean;
-        function CompareTypes(f1: Class, f2: Class): number;
-        function CompareString(s1: string, s2: string, ignoreCase?: boolean): number;
-        function CompareStringIgnoreCase(s1: string, s2: string): number;
-        function EqualsString(s1: string, s2: string, ignoreCase?: boolean): boolean;
-        function EqualsStringIgnoreCase(s1: string, s2: string): boolean;
-        function CompareObjects<T>(o1: T, o2: T): number;
-    }
-}
 declare module mika.utils.TimeUtils {
     import IComparable = mika.utils.List.IComparable;
     class DateTime implements IComparable<DateTime> {
@@ -742,63 +765,6 @@ declare module mika.utils.Threads {
         /** if (timeOut == null) unlimited timeout */
         abort(waitTimeOut?: number, suspendCurrentThread?: boolean, callback?: WaitTimerCallBack): void;
         compareTo(obj: DeferredAction): number;
-    }
-}
-declare module mika.utils.List {
-    class ArrayIterator<T> implements mika.utils.List.IIterator<T> {
-        private _index;
-        private _array;
-        constructor(array: T[]);
-        hasNext(): boolean;
-        next(): T;
-    }
-}
-declare module mika.utils.List {
-    interface ICollection<T> extends List.IIterable<T> {
-        add(item: T): boolean;
-        remove(item: T): boolean;
-        size(): number;
-        contains(item: T): boolean;
-        clear(): any;
-    }
-}
-declare module mika.utils.List {
-    interface ISet<T> extends List.ICollection<T> {
-        get(index: number): T;
-        set(index: number, value: T): T;
-        insert(index: number, item: T): boolean;
-        removeAt(index: number): T;
-        indexOf(item: T): number;
-        toArray<T2 extends T>(): T2[];
-    }
-}
-declare module mika.utils.List {
-    interface IComparator<T> extends Function {
-        (o1: T, o2: T): number;
-    }
-}
-interface Array<T> extends mika.utils.List.ISet<T> {
-    copyOf<T2>(index?: number, count?: number): T2[];
-    copyTo<T2>(dest: T2[], srcIndex?: number, srcCount?: number, dstIndex?: number): any;
-    binarySearch(item: T, comparator?: mika.utils.List.IComparator<T>, startIndex?: number, length?: number): number;
-    fill(value: T, startIndex?: number, count?: number): any;
-    addArray<T2 extends T>(array: T2[]): any;
-}
-declare module mika.utils.List {
-}
-declare module mika.utils.Async.Quants {
-    class QuantsFactory {
-        static Scope(quantList: IQuantFunc[]): IQuant;
-        static Cycle(init: () => any, condition: () => boolean, iterator: () => any, bodyList: IQuantFunc[]): IQuantFunc[];
-        static Try(tryList: IQuantFunc[]): ITryQuant;
-        static Func<TResult>(bodyList: IQuantFunc[]): IFuncQuant<TResult>;
-    }
-    interface IQuantProcessor {
-        _BREAK: IQuantFunc;
-        _CONTINUE: IQuantFunc;
-        _RETURN: IQuantFunc;
-        _CATCH: IQuantFunc;
-        _FINALLY: IQuantFunc;
     }
 }
 declare module mika.utils.Async.Events {
@@ -1197,26 +1163,37 @@ declare module mika.utils.List {
     }
 }
 declare module mika.datamodel.contracts {
+    interface IDataBaseResult<TResultData> {
+        /** Запрос обработан, не отменен и не заменен полностью другим. */
+        result: boolean;
+        tryAgain?: boolean;
+        data?: TResultData;
+        error?: boolean;
+    }
+}
+declare module mika.datamodel.contracts {
     import IDisposable = utils.Contracts.Patterns.IDisposable;
-    interface IDataBase<TItem, TSelectQuery, TQueryResult> extends IDisposable {
+    interface IDataBase<TEntity, TEntityResult, TQuery, TQueryResult> extends IDisposable {
         /** Equivalent SQL: INSERT OR IGNORE */
-        Add(item: TItem, callback?: (result: boolean) => void): void;
+        Add(item: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
         /** Equivalent SQL: DELETE IF EXISTS */
-        Remove(item: TItem, callback?: (result: boolean) => void): void;
+        Delete(item: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
         /** Equivalent SQL: INSERT OR REPLACE */
-        Replace(item: TItem, callback?: (result: boolean) => void): void;
+        Replace(item: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
         /** Equivalent SQL: INSERT OR UPDATE */
-        Update(item: TItem, callback?: (result: boolean) => void): void;
-        /** Equivalent SQL: SELECT */
-        Select(query: TSelectQuery, callback: (result: TQueryResult) => void): void;
+        Update(item: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
+        /** Equivalent SQL: SELECT|Other */
+        Query(query: TQuery, callback: (result: IDataBaseResult<TQueryResult>) => void): void;
     }
 }
 declare module mika.datamodel.contracts {
     import WaitTimerQuantCallBack = mika.utils.Async.WaitTimerQuantCallBack;
-    interface IDataBaseAsync<TItem, TSelectQuery, TQueryResult> extends IDataBase<TItem, TSelectQuery, TQueryResult> {
+    interface IDataBaseAsync<TEntity, TEntityResult, TQuery, TQueryResult> extends IDataBase<TEntity, TEntityResult, TQuery, TQueryResult> {
         ForceSynchronize(suspendCurrentThread?: boolean, timeOut?: number, callback?: WaitTimerQuantCallBack): any;
         ClearActionList(): any;
         CountActions(): number;
+        WaitItem(itemId: TEntity, callback: (result: IDataBaseResult<TEntityResult>) => void): void;
+        LockItem(itemId: TEntity, callback: (result: IDataBaseResult<TEntityResult>, unlock: () => void) => void): void;
     }
 }
 declare module mika.datamodel.contracts {
@@ -1229,14 +1206,16 @@ declare module mika.datamodel {
     import IComparator = utils.List.IComparator;
     import IObjectMerger = datamodel.contracts.IObjectMerger;
     import WaitTimerQuantCallBack = mika.utils.Async.WaitTimerQuantCallBack;
-    /** !! Внимание: для корректной работы, не забудь определить методы hashcode и compareTo в классе TItem, либо передать эти функции конструктору (itemsComparator, getHashCode) */
-    class BaseDataBaseAsyncSaver<TItem, TSelectQuery, TQueryResult> implements IDataBaseAsync<TItem, TSelectQuery, TQueryResult> {
+    import IDataBaseResult = mika.datamodel.contracts.IDataBaseResult;
+    /** !! Внимание: для корректной работы, не забудь определить методы hashcode и compareTo в классе TEntity, либо передать эти функции конструктору (itemsComparator, getHashCode) */
+    class BaseDataBaseAsyncSaver<TEntity, TEntityResult, TQuery, TQueryResult> implements IDataBaseAsync<TEntity, TEntityResult, TQuery, TQueryResult> {
         private onlyForceSave;
         private _deferredSynchronize;
-        protected _dataBaseModel: IDataBaseAsync<TItem, TSelectQuery, TQueryResult>;
+        protected _dataBaseModel: IDataBaseAsync<TEntity, TEntityResult, TQuery, TQueryResult>;
         private _id;
         private _newActions;
         private _processedItems;
+        private _lockedItems;
         private _processedQueries;
         private _items;
         private _queries;
@@ -1247,11 +1226,18 @@ declare module mika.datamodel {
         private static _globalCurrentAsyncOperations;
         private _maxTryCount;
         private _synchronizePause;
-        constructor(dataBaseModel: IDataBaseAsync<TItem, TSelectQuery, TQueryResult>, itemsMerger: IObjectMerger<TItem>, itemsComparator?: IComparator<TItem>, getHashCode?: (TItem) => number, selectQueryComparator?: IComparator<TSelectQuery>, getSelectQueryHashCode?: (TSelectQuery) => number, autoSynchronize?: boolean);
+        private _itemsComparator;
+        private _queryComparator;
+        constructor(dataBaseModel: IDataBaseAsync<TEntity, TEntityResult, TQuery, TQueryResult>, itemsMerger: IObjectMerger<TEntity>, itemsComparator?: IComparator<TEntity>, getHashCode?: (TEntity) => number, queryComparator?: IComparator<TQuery>, getQueryHashCode?: (TQuery) => number, autoSynchronize?: boolean);
+        private checkNewAction();
+        private checkNewAction2(item);
         private addNewAction(action);
         private _itemsChangedListener;
         private globalCurrentAsyncOperationsDecreaseListener;
         private static _globalCurrentAsyncOperationsDecrease;
+        WaitItem(itemId: TEntity, callback: (result: IDataBaseResult<TEntityResult>) => void): void;
+        LockItem(itemId: TEntity, callback: (result: IDataBaseResult<TEntityResult>, unlock: () => void) => void): void;
+        private unLockItem(itemId);
         getNotHandledCount(): number;
         getAutoSynchronize(): boolean;
         setAutoSynchronize(value: boolean): void;
@@ -1268,21 +1254,448 @@ declare module mika.datamodel {
         ClearActionList(): void;
         CountActions(): number;
         private allowNewProcessItem();
-        private resultHandler<TItem2, TResult2>(result, action, precessedItems, items, addHandler, updateHandler, selectHandler, defaultHandler?);
+        private resultHandler<TItem2, TResult2>(result, action, precessedItems, items, addHandler, updateHandler, queryHandler, defaultHandler?);
         private resultMergeWithDefault;
         private resultMergeWithUpdate;
         private resultMergeAdd;
         private synchronize;
-        Add(item: TItem, callback: (result: boolean) => void): void;
-        Remove(item: TItem, callback: (result: boolean) => void): void;
-        Replace(item: TItem, callback: (result: boolean) => void): void;
-        Update(item: TItem, callback: (result: boolean) => void): void;
-        Select(query: TSelectQuery, callback: (result: TQueryResult) => void): void;
+        Add(item: TEntity, callback: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Delete(item: TEntity, callback: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Replace(item: TEntity, callback: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Update(item: TEntity, callback: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Query(query: TQuery, callback: (result: IDataBaseResult<TQueryResult>) => void): void;
         ForceSynchronize(suspendCurrentThread?: boolean, timeOut?: number, callback?: WaitTimerQuantCallBack): void;
         ForceDeferredSynchronize(suspendCurrentThread?: boolean, timeOut?: number, callback?: WaitTimerQuantCallBack): void;
         Synchronize(): void;
         protected disposed: boolean;
         dispose(suspendCurrentThread?: boolean, abortTimeOut?: number, callBack?: () => void): void;
+    }
+}
+declare module mika.data.ajax {
+    module AjaxUtils {
+        function globalErrorHandler(url: any, xhr: any, status: any, error: any): void;
+        function globalSuccessHandled(url: any, data: any, status: any, xhr: any): void;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class ODataParams {
+        constructor(propertyDelimeter?: string, arrayDelimeter?: string);
+        valueToString(value: any): string;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    /** $format=...
+     * http://docs.oasis-open.org/odata/odata-json-format/v4.0/odata-json-format-v4.0.html
+     * */
+    class ODataFormat extends ODataParams {
+        constructor();
+        /** Response formats:
+         * application/json
+         * */
+        "": string;
+        /** to specify the amount of metadata included in the response
+         * none, minimal, full
+         * */
+        "odata.metadata": string;
+        /** http://docs.oasis-open.org/odata/odata-json-format/v4.0/errata02/os/odata-json-format-v4.0-errata02-os-complete.html#_Payload_Ordering_Constraints_1 */
+        "odata.streaming": boolean;
+        /** if Edm.Int64 and Edm.Decimal numbers are represented as strings */
+        "IEEE754Compatible": boolean;
+        charset: string;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    /** http://docs.oasis-open.org/odata/odata/v4.0/cs01/part1-protocol/odata-v4.0-cs01-part1-protocol.html#_Common_Headers */
+    interface ICommonHeaders {
+        /** == $format */
+        "Content-Type"?: string;
+        charset: string;
+        "Content-Encoding"?: string;
+        "OData-Version"?: string;
+        "OData-MaxVersion"?: string;
+    }
+    /** http://docs.oasis-open.org/odata/odata/v4.0/cs01/part1-protocol/odata-v4.0-cs01-part1-protocol.html#_Response_Headers */
+    interface IResponseHeaders extends ICommonHeaders {
+        /** == $format */
+        "ETag"?: string;
+        "Location": string;
+        "OData-EntityId"?: string;
+        "Preference-Applied"?: string;
+        "Retry-After"?: string;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class CommonHeaders {
+        /** == $format */
+        "Content-Type": ODataFormat;
+        "Content-Encoding": string;
+        "OData-Version": string;
+        "OData-MaxVersion": string;
+    }
+    class CallbackParams {
+        url: string;
+        constructor(url: string);
+        toString(): string;
+    }
+    class PreferHeader extends ODataParams {
+        constructor();
+        "odata.continue-on-error": boolean;
+        "odata.include-annotations": string;
+        "odata.maxpagesize": number;
+        "odata.track-changes": boolean;
+        /** representation, minimal */
+        "return": string;
+        "respond-async": boolean;
+        "wait": number;
+        valueToString(value: any): string;
+    }
+    /** http://docs.oasis-open.org/odata/odata/v4.0/cs01/part1-protocol/odata-v4.0-cs01-part1-protocol.html#_Request_Headers */
+    class RequestHeaders extends CommonHeaders {
+        "Accept": string;
+        "Accept-Charset": string;
+        "If-Match": string;
+        "If-None-Match": string;
+        "OData-MaxVersion": string;
+        "Prefer": CallbackParams;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    /** http://docs.oasis-open.org/odata/odata-json-format/v4.0/errata02/os/odata-json-format-v4.0-errata02-os-complete.html#ResourceReference */
+    interface IEntityReference {
+        /** "@odata.id": "http://services.odata.org/V3/OData/OData.svc/Products(0)" */
+        "@odata.id"?: string;
+    }
+    /** http://docs.oasis-open.org/odata/odata-json-format/v4.0/errata02/os/odata-json-format-v4.0-errata02-os-complete.html#Entitiy */
+    interface IEntity extends IEntityReference {
+        /** "@odata.type": "ODataDemo.Product" */
+        "@odata.type"?: string;
+        /** "@odata.id": "http://services.odata.org/V3/OData/OData.svc/Products(0)"
+         * "@odata.id": "Customers('ALFKI')"
+         */
+        "@odata.id"?: string;
+        /** "@odata.editLink": "Products(0)"
+         * "@odata.editLink": "Customers('ALFKI')"
+         */
+        "@odata.editLink"?: string;
+        /** "@odata.etag": "W/\"MjAxMy0wNS0yN1QxMTo1OFo=\"" */
+        "@odata.etag"?: string;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    /** http://docs.oasis-open.org/odata/odata-json-format/v4.0/errata02/os/odata-json-format-v4.0-errata02-os-complete.html#_Toc403940604 */
+    interface IResponse {
+        /** the root context URL of the payload and the context URL for any deleted entries or added or deleted links in a delta response, or for entities or entity collections whose set cannot be determined from the root context URL.
+         * "@odata.context": "http://services.odata.org/V4/TripPinServiceRW/$metadata"
+         * */
+        "@odata.context"?: string;
+        /** the ETag of the metadata document as applicable */
+        "@odata.metadataEtag"?: string;
+        /** the ETag of the entity, as appropriate */
+        "@odata.etag"?: string;
+        /** the total count of a collection of entities or collection of entity references, if requested */
+        "@odata.count"?: string;
+        /** the next link of a collection with partial results */
+        "@odata.nextLink"?: string;
+        /** the delta link for obtaining changes to the result, if requested */
+        "@odata.deltaLink"?: string;
+        /** the ID of the entity */
+        "@odata.id"?: string;
+        /** the link used to read the entity, if the edit link cannot be used to read the entity */
+        "@odata.readLink"?: string;
+        /** the link used to edit/update the entity, if the entity is updatable and the @odata.id does not represent a URL that can be used to edit the entity */
+        "@odata.editLink"?: string;
+        /** the link used to retrieve the values of a navigation property */
+        "@odata.navigationLink"?: string;
+        /** the link used to describe the relationship between this entity and related entities */
+        "@odata.associationLink"?: string;
+        /** the type of the containing object or targeted property if the type of the object or targeted property cannot be heuristically determined */
+        "@odata.type"?: string;
+        /** the link used to read the stream */
+        "@odata.mediaReadLink"?: string;
+        /** the link used to edit/update the stream */
+        "@odata.mediaEditLink"?: string;
+        /** the ETag of the stream, as appropriate */
+        "@odata.mediaEtag"?: string;
+        /** the content type of the stream */
+        "@odata.mediaContentType"?: string;
+    }
+    interface IResponseList<TEntity extends IEntity> extends IResponse {
+        value: TEntity[];
+    }
+    interface IResponseSingle<TEntity extends IEntity> extends IResponse {
+        value: TEntity;
+    }
+    interface IResponseEntity extends IEntity, IResponse {
+    }
+    interface IResponseError {
+        "@odata.error": any;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    enum HttpMethod {
+        GET = 0,
+        POST = 1,
+        PUT = 2,
+        DELETE = 3,
+        PATCH = 4,
+        MERGE = 5,
+    }
+    class ODataRelParams<TId> extends ODataParams {
+        /** $id=http://localhost:6570/odata/Bind2(19) */
+        $id: string;
+    }
+    class ODataRequest<TParams extends ODataParams, TId> {
+        constructor(method: HttpMethod, serviceUrl: string, resource: string, id: TId);
+        headers: RequestHeaders;
+        method: HttpMethod;
+        /** http://services.odata.org/OData/OData.svc */
+        serviceUrl: string;
+        /** Category(1)/Products
+         * Categories(1)/Products(1)/Supplier/Address/City/$value
+         */
+        resource: string;
+        id: TId;
+        /** $top=2&$orderby=name */
+        params: TParams;
+        protected static addSlash(url: string): string;
+        makeUrl(): string;
+        static makeUrlResource(serviceUrl: string, resourcePart: string): string;
+        static makeUrlPartResource(resource: string, id: any): string;
+        makeUrlPartResource(): string;
+        makeContent(): any;
+        getResponse(callback: (response: IResponse, errorCode: number) => any): JQueryPromise<any>;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    interface IODataSelectParams {
+        /** $select=field1,field2
+         * $select=*
+         */
+        $select?: string[];
+        /**$select=Name,Products&$expand=Products/Suppliers*/
+        $expand?: string[];
+        /** {@link http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#FilterSystemQueryOption OData Documentation}
+         * Logical:
+         * and, or, not
+         * eq   ==
+         * ne   !=
+         * gt   >
+         * ge   >=
+         * lt   <
+         * le   <=
+         *
+         * Arithmetic: add, sub, mul, div, mod
+         * $filter=Price div 2 gt 4
+         *
+         * Grouping: (...)
+         * $filter=(Price sub 5) gt 10
+         *
+         * String Functions:
+         * bool substringof(find, text)
+         * bool endswith(text, end)
+         * bool startswith(text, start)
+         * int length(text)
+         * int indexof(text, find)
+         * string replace(text, find, replace)
+         * string substring(text, pos, length?)
+         * string tolower(text)
+         * string toupper(text)
+         * string trim(text)
+         * string concat(text, text)
+         *
+         * Date Functions:
+         * int year(DateTime)
+         * int month(DateTime)
+         * int day(DateTime)
+         * int hour(DateTime)
+         * int minute(DateTime)
+         * int second(DateTime)
+         *
+         * Math Functions (double|decimal):
+         * double round(double)
+         * double floor(double)
+         * double ceiling(double)
+         *
+         * Type Functions:
+         * bool IsOf(type)
+         * bool IsOf(expression, type)
+         * $filter=isof('NorthwindModel.Order')
+         * $filter=isof(ShipCountry, 'Edm.String')
+         *
+         * Examples:
+         * $filter=Address/City eq 'Redmond'
+         * $filter=Price le 200 and Price gt 3.5
+         * $filter=not endswith(Description,'milk')
+         */
+        $filter?: string;
+        /** The $levels expand option can be used to specify the number of levels of recursion for a hierarchy in which the related entity type is the same as, or can be cast to, the source entity type. The same expand options are applied at each level of the hierarchy. */
+        $levels?: number;
+        /** $orderby=Name desc
+         * $orderby=Name asc
+         * $orderby=Name
+         */
+        $orderby?: string[];
+        $top?: number;
+        $skip?: number;
+        /** $format=application/json
+         * $format=application/json;odata.metadata=full */
+        $format?: ODataFormat;
+        /** Include count of entities to response
+         * $inlinecount=allpages
+         response: odata.count=11 */
+        $inlinecount?: string;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class ODataSelectParams extends ODataParams implements IODataSelectParams {
+        constructor(params?: IODataSelectParams);
+        $select: string[];
+        $expand: string[];
+        $filter: string;
+        $levels: number;
+        $orderby: string[];
+        $top: number;
+        $skip: number;
+        $format: mika.utils.data.OData.V4.ODataFormat;
+        $inlinecount: string;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class ODataModificationRequest<TEntity extends IEntity, TId> extends ODataRequest<ODataParams, TId> {
+        constructor(method: HttpMethod, serviceUrl: string, resource: string, data: TEntity, id: TId);
+        data: TEntity;
+        makeContent(): TEntity;
+    }
+    class ODataSelectRequest<TId> extends ODataRequest<ODataSelectParams, TId> {
+        constructor(params: IODataSelectParams, id?: TId, serviceUrl?: string, resource?: string);
+    }
+    /** INSERT OR IGNORE */
+    class ODataAddRequest<TEntity extends IEntity, TId> extends ODataModificationRequest<TEntity, TId> {
+        constructor(serviceUrl: string, resource: string, data: TEntity, id: TId);
+    }
+    /** INSERT OR MERGE */
+    class ODataUpdateRequest<TEntity extends IEntity, TId> extends ODataModificationRequest<TEntity, TId> {
+        constructor(serviceUrl: string, resource: string, data: TEntity, id: TId);
+    }
+    /** DELETE */
+    class ODataDeleteRequest<TEntity extends IEntity, TId> extends ODataModificationRequest<TEntity, TId> {
+        constructor(serviceUrl: string, resource: string, id: TId);
+        makeContent(): any;
+    }
+    /** INSERT OR REPLACE */
+    class ODataReplaceRequest<TEntity extends IEntity, TId> extends ODataModificationRequest<TEntity, TId> {
+        constructor(serviceUrl: string, resource: string, data: TEntity, id: TId);
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    import IDataBaseResult = mika.datamodel.contracts.IDataBaseResult;
+    import IDataBase = mika.datamodel.contracts.IDataBase;
+    interface IODataBase<TEntity extends IEntity, TEntityResult extends IEntity, TQuery extends ODataRequest<ODataParams, any>, TQueryResult extends IResponse> extends IDataBase<TEntity, TEntityResult, TQuery, TQueryResult> {
+        DeleteById(entityId: any, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    interface IODataRequestsBuilder<TEntity extends IEntity, TId, TQuery extends ODataRequest<ODataParams, any>> {
+        Add(entity: TEntity): ODataRequest<ODataParams, TId>;
+        Update(entity: TEntity): ODataRequest<ODataParams, TId>;
+        DeleteById(id: TId): ODataRequest<ODataParams, TId>;
+        Delete(entity: TEntity): ODataRequest<ODataParams, TId>;
+        Replace(entity: TEntity): ODataRequest<ODataParams, TId>;
+        Query(query: TQuery): TQuery;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class ODataRequestsBuilder<TEntity extends IEntity, TQuery extends ODataRequest<ODataParams, any>, TId> implements IODataRequestsBuilder<TEntity, TId, TQuery> {
+        serviceUrl: string;
+        resource: string;
+        idField: string;
+        nullId: TId;
+        constructor(serviceUrl: string, resource: string, idField: string, nullId: TId);
+        Add(entity: TEntity): ODataModificationRequest<TEntity, TId>;
+        Update(entity: TEntity): ODataModificationRequest<TEntity, TId>;
+        DeleteById(id: TId): ODataRequest<ODataParams, TId>;
+        Delete(entity: TEntity): ODataRequest<ODataParams, TId>;
+        Replace(entity: TEntity): ODataModificationRequest<TEntity, TId>;
+        Query(query: TQuery): TQuery;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    import IDataBaseResult = mika.datamodel.contracts.IDataBaseResult;
+    class ODataBase<TEntity extends IEntity, TId, TEntityResult extends IEntity, TQuery extends ODataRequest<ODataParams, any>, TQueryResult extends IResponse> implements IODataBase<TEntity, TEntityResult, TQuery, TQueryResult> {
+        private _requestBuilder;
+        constructor(requestBuilder: IODataRequestsBuilder<TEntity, TId, TQuery>);
+        private static _tryAgainCodes;
+        protected getResponse(entity: TEntity, query: ODataRequest<any, any>, callback?: (result: IDataBaseResult<TEntityResult | TQueryResult>) => void): void;
+        Add(entity: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
+        DeleteById(entityId: TId, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Delete(entity: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Replace(entity: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Update(entity: TEntity, callback?: (result: IDataBaseResult<TEntityResult>) => void): void;
+        Query(query: TQuery, callback: (result: IDataBaseResult<TQueryResult>) => void): void;
+        dispose(): void;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class ODataBaseRel<TId, TQuery extends ODataRequest<ODataParams, any>, TQueryResult extends IResponse> extends ODataBase<IRelation<TId>, TId, IEntity, TQuery, TQueryResult> {
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class ODataRelRequest<TParams extends ODataParams, TId> extends ODataRequest<TParams, TId> {
+        constructor(method: HttpMethod, serviceUrl: string, resource: string, resourceRel: string, id: TId, idRel: TId);
+        resourceRel: string;
+        idRel: TId;
+        makeUrlPartResource(): string;
+        makeUrlPartResourceRel(): string;
+        makeUrlRel(): string;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    /** INSERT OR IGNORE */
+    class ODataModificationRelRequest<TId> extends ODataRelRequest<ODataRelParams<TId>, TId> {
+        constructor(method: HttpMethod, serviceUrl: string, resource: string, resourceRel: string, id: TId, idRel: TId);
+        makeContent(): IEntityReference;
+    }
+    /** INSERT OR IGNORE */
+    class ODataAddRelRequest<TEntity extends IEntity, TId> extends ODataModificationRelRequest<TId> {
+        constructor(serviceUrl: string, resource: string, resourceRel: string, id: TId, idRel: TId);
+    }
+    /** INSERT OR MERGE */
+    class ODataUpdateRelRequest<TEntity extends IEntity, TId> extends ODataModificationRelRequest<TId> {
+        constructor(serviceUrl: string, resource: string, resourceRel: string, id: TId, idRel: TId);
+    }
+    /** DELETE */
+    class ODataDeleteRelRequest<TEntity extends IEntity, TId> extends ODataModificationRelRequest<TId> {
+        constructor(serviceUrl: string, resource: string, resourceRel: string, id: TId, idRel: TId);
+        makeUrl(): string;
+        makeContent(): any;
+    }
+    /** INSERT OR REPLACE */
+    class ODataReplaceRelRequest<TEntity extends IEntity, TId> extends ODataModificationRelRequest<TId> {
+        constructor(serviceUrl: string, resource: string, resourceRel: string, id: TId, idRel: TId);
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    interface IRelation<TId> {
+        id: TId;
+        idRel: TId;
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    interface IODataRelRequestsBuilder<TId, TQuery extends ODataRequest<ODataRelParams<any>, any>> extends IODataRequestsBuilder<IRelation<TId>, TId, TQuery> {
+    }
+}
+declare module mika.utils.data.OData.V4 {
+    class ODataRelRequestsBuilder<TQuery extends ODataRelRequest<ODataRelParams<any>, any>, TId> implements IODataRelRequestsBuilder<TId, TQuery> {
+        serviceUrl: string;
+        resource: string;
+        resourceRel: string;
+        constructor(serviceUrl: string, resource: string, resourceRel: string);
+        Add(relation: IRelation<TId>): ODataRequest<ODataParams, TId>;
+        Update(relation: IRelation<TId>): ODataRequest<ODataParams, TId>;
+        Delete(relation: IRelation<TId>): ODataRequest<ODataParams, TId>;
+        Replace(relation: IRelation<TId>): ODataRequest<ODataParams, TId>;
+        Query(query: TQuery): TQuery;
+        DeleteById(id: TId): ODataRequest<ODataParams, TId>;
     }
 }
 declare module mika.utils.Serialization {
