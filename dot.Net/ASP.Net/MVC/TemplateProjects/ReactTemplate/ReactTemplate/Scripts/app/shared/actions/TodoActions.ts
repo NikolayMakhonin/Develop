@@ -5,15 +5,38 @@ module app.shared.actions {
 
     export class TodoListActions extends Actions {
         getTasks() {
-         
+            return [
+                {
+                    id: 1,
+                    text: 'Rule the World',
+                    completed: false
+                },
+                {
+                    id: 2,
+                    text: 'Be an Awesome',
+                    completed: true
+                }
+            ];
         }
 
         getActiveTasks() {
-
+            return [
+                {
+                    id: 1,
+                    text: 'Rule the World',
+                    completed: false
+                }
+            ];
         }
 
         getCompletedTasks() {
-
+            return [
+                {
+                    id: 2,
+                    text: 'Be an Awesome',
+                    completed: true
+                }
+            ];
         }
 
         deleteCompletedTasks() {

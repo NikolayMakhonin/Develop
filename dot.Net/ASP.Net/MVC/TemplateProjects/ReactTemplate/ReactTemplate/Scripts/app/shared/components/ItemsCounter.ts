@@ -1,7 +1,9 @@
 ///<reference path="../../../typings/react.d.ts"/>
+///<reference path="../../utils/ReactComponent.ts"/>
 
 module app.shared.components {
     import ReactComponent = app.utils.ReactComponent;
+    var React = nodejs.react.React;
 
     export class ItemsCounter extends ReactComponent<any, any> {
         render() {

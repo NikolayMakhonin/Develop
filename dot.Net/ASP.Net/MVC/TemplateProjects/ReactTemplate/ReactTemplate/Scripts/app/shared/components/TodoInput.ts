@@ -1,7 +1,9 @@
 ///<reference path="../../../typings/react.d.ts"/>
+///<reference path="../../utils/ReactComponent.ts"/>
 
 module app.shared.components {
     import ReactComponent = app.utils.ReactComponent;
+    var React = nodejs.react.React;
     var ESCAPE_KEY = 27;
     var ENTER_KEY = 13;
 

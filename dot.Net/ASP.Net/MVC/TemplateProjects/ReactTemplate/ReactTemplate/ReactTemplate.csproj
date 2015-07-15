@@ -194,25 +194,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="README.md" />
-    <TypeScriptCompile Include="Scripts\App\utils\ReactComponent.ts" />
-    <TypeScriptCompile Include="Scripts\App\client\app.ts" />
-    <TypeScriptCompile Include="Scripts\App\client\routes.ts" />
-    <Content Include="Scripts\App\public\js\.gitignore" />
-    <TypeScriptCompile Include="Scripts\App\shared\actions\TodoActions.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\components\ItemsCounter.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\components\TodoInput.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\components\TodoItem.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\components\TodoList.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\components\ToggleAll.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\Flux.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\handlers\AppHandler.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\handlers\TodoHandler.ts" />
-    <TypeScriptCompile Include="Scripts\App\shared\stores\TodoStore.ts" />
-    <TypeScriptCompile Include="Scripts\App\utils\performRouteHandlerStaticMethod.ts" />
+    <Content Include="_build\build_app.cmd" />
+    <Content Include="_build\convert_jsx.cmd" />
+    <TypeScriptCompile Include="Scripts\app\utils\ReactComponent.ts" />
+    <TypeScriptCompile Include="Scripts\app\client\app.ts" />
+    <TypeScriptCompile Include="Scripts\app\client\routes.ts" />
+    <Content Include="Scripts\app\public\js\.gitignore" />
+    <TypeScriptCompile Include="Scripts\app\shared\actions\TodoActions.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\components\ItemsCounter.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\components\TodoInput.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\components\TodoItem.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\components\TodoList.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\components\ToggleAll.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\Flux.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\handlers\AppHandler.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\handlers\TodoHandler.ts" />
+    <TypeScriptCompile Include="Scripts\app\shared\stores\TodoStore.ts" />
+    <TypeScriptCompile Include="Scripts\app\utils\performRouteHandlerStaticMethod.ts" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\app\client\app.jsx" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -222,14 +224,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\TypeScriptUtils.js" />
     <Content Include="Scripts\npm.js" />
-    <Content Include="Scripts\react\JSXTransformer-0.13.1.js" />
-    <Content Include="Scripts\react\react-0.13.1.js" />
-    <Content Include="Scripts\react\react-0.13.1.min.js" />
-    <Content Include="Scripts\react\react-with-addons-0.13.1.js" />
-    <Content Include="Scripts\react\react-with-addons-0.13.1.min.js" />
+    <Content Include="Scripts\react.js" />
+    <Content Include="Scripts\TypeScriptUtils.js" />
     <Content Include="Web.config" />
+    <TypeScriptCompile Include="Scripts\TypeScriptUtils.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\react.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\TypeScriptUtils.d.ts" />
   </ItemGroup>
@@ -266,7 +265,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\TypeScriptUtils.d.ts" />
     <None Include="Scripts\typings\flux\flux.d.ts_" />
     <None Include="Scripts\typings\react\react.d.ts_" />
   </ItemGroup>
@@ -288,6 +286,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -310,6 +309,9 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>cmd /C $(ProjectDir)_build\build_app.cmd</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

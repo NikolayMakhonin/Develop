@@ -3,6 +3,7 @@
 ///<reference path="../shared/handlers/TodoHandler.ts"/>
 
 module app.client {
+    var React = nodejs.react.React;
     var Route = nodejs.react.Router.Route;
     var DefaultRoute = nodejs.react.Router.DefaultRoute;
     var NotFoundRoute = nodejs.react.Router.NotFoundRoute;

@@ -11,18 +11,20 @@ namespace ReactTemplate
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/js/vendors").Include(
-                "~/Scripts/TypeScriptUtils.js",
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundleExt("~/bundles/js/react").Include(
-                "~/Scripts/react/react-{version}.js").IncludeWithReferences(
-                "~/Scripts/react/flux/index.js"
+                "~/Scripts/react.js"
                 ));
 
+            bundles.Add(new ScriptBundleExt("~/bundles/js/utils").Include(
+                "~/Scripts/TypeScriptUtils.js"
+                )); 
+            
             bundles.Add(new ScriptBundleExt("~/bundles/js/app").IncludeWithReferences(
-                new FileFilterCollection(JavaScriptFilters.TypeScriptFilter, JavaScriptFilters.JsToJsxFilter).Filter,
-                "~/Scripts/App/App.ts"));
+                new FileFilterCollection(JavaScriptFilters.TypeScriptFilter).Filter,
+                "~/Scripts/app/client/app.ts"));
 
             bundles.Add(new StyleBundle("~/bundles/css/vendors").Include(
                  "~/Content/bootstrap.css",

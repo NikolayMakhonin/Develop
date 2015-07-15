@@ -1,19 +1,15 @@
+///<reference path="../shared/Flux.ts"/>
+///<reference path="../utils/performRouteHandlerStaticMethod.ts"/>
+///<reference path="routes.ts"/>
 ///<reference path="../../typings/react.d.ts"/>
 
 module app.client {
     import Flux = app.shared.Flux;
-    import React = nodejs.react.React;
+    var React = nodejs.react.React;
     import performRouteHandlerStaticMethod = utils.performRouteHandlerStaticMethod;
     import url = nodejs.url;
     import Router = nodejs.react.Router;
-    var FluxComponent = nodejs.react.flux.FluxComponent; //import 'babel/polyfill';
-    //import React from 'react';
-    //import Router from 'react-router';
-    //import FluxComponent from 'flummox/component';
-    //import Flux from '../shared/Flux';
-    //import routes from './routes';
-    //import performRouteHandlerStaticMethod from '../utils/performRouteHandlerStaticMethod';
-    //import url from 'url';
+    var FluxComponent = nodejs.react.flux.FluxComponent; 
 
     var flux = new Flux();
 
@@ -33,7 +29,7 @@ module app.client {
                 <Handler {...state} />
             </FluxComponent>
             */}),
-            document.getElementById('app')
+            document.getElementById('react_app')
         );
     });
 

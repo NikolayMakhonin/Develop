@@ -1,9 +1,11 @@
 ///<reference path="../../../typings/react.d.ts"/>
+///<reference path="../../utils/ReactComponent.ts"/>
 ///<reference path="TodoItem.ts"/>
 
 module app.shared.components {
     import ReactComponent = app.utils.ReactComponent;
     var TodoItem = components.TodoItem;
+    var React = nodejs.react.React;
 
     export class TodoList extends ReactComponent<any, any> {
         onToggleStatus(id, completed) {
@@ -15,14 +17,15 @@ module app.shared.components {
         }
 
         render() {
+            var self = this;
             return (() => {
                 /*
                 <ul className="todo-list">
-                    {this.props.tasks.map(task =>
-                        <TodoItem key={task.id} task={task}
-                                  onToggleStatus={this.onToggleStatus.bind(this, task.id)}
-                                  onDeleteTask={this.onDeleteTask.bind(this, task.id)} />
-                    )}
+                    {this.props.tasks.map(function(task) {
+                        return <TodoItem key={task.id} task={task}
+                                  onToggleStatus={self.onToggleStatus.bind(this, task.id)}
+                                  onDeleteTask={self.onDeleteTask.bind(this, task.id)} />
+                    })}
                 </ul>
                 */
             });

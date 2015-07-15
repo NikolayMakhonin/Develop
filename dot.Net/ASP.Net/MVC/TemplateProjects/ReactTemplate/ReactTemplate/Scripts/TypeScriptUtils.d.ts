@@ -1933,6 +1933,7 @@ declare module mika.utils.Contracts.Delegates {
 declare var fail: (message?: string) => any;
 declare var DEBUG_MODE: boolean;
 declare module mika.utils.Tests {
+    function globalInit(): boolean;
     class TestUtils {
         private static _debugLog;
         static debugLogClear(): void;

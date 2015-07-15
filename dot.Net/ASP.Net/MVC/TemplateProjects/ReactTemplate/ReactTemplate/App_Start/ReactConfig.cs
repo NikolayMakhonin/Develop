@@ -21,7 +21,7 @@ namespace ReactTemplate
 			// your components as well as all of their dependencies.
 			// See http://reactjs.net/ for more information. Example:
 			ReactSiteConfiguration.Configuration
-				.AddScript("~/Scripts/app/app.jsx");
+				.AddScript("~/Scripts/app/client/app.jsx");
 		}
 	}
 }

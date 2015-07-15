@@ -3,18 +3,24 @@
 module app.utils {
 
     import React = nodejs.react.React;
-    (<any>utils).ReactComponent = React.createClass({
-        react: (): any => { }
+    (<any>utils).ReactComponentBase = React.createClass({
+        render: (): any => { throw new Error("Method render is not implemented"); }
     });
 
-    export declare class ReactComponent<TProps, TState> {
+    delete (<any>utils).ReactComponentBase.displayName;
+
+    export declare class ReactComponentBase<TProps, TState> {
         //#region React.createClass(...)
         constructor(props: TProps, context?);
+
         getDOMNode();
+
         props;
         context;
         state: any;
+
         render();
+
         mixins: any;
         statics: any;
         propTypes: any;
@@ -24,17 +30,25 @@ module app.utils {
         getInitialState: any;
         getChildContext: any;
         updateComponent: any;
+
         setState(partialState, callback);
+
         forceUpdate(callback);
+
         replaceState(newState, callback);
+
         isMounted();
+
         setProps(partialProps, callback);
+
         replaceProps(newProps, callback);
+
         //#endregion
 
         //#region ReactComponent<TProps, TState>
         react: () => any;
         refs: { [ref: string]: ReactComponent<any, any>; }
+
         /**
          * If this component has been mounted into the DOM, this returns the corresponding native browser DOM element. 
          * This method is useful for reading values out of the DOM, such as form field values and performing DOM measurements.
@@ -96,6 +110,7 @@ module app.utils {
          * @param callback an optional callback that is executed once forceUpdate is completed.
          */
         forceUpdate(callback?: () => void): void;
+
         //#endregion
 
         //#region ReactComponentSpec<TProps, TState>
@@ -161,7 +176,15 @@ module app.utils {
          * Perform any necessary cleanup in this method, such as invalidating timers or cleaning up any DOM elements that were created in componentDidMount.
          */
         componentWillUnmount(): void;
+
         //#endregion
     }
+}
 
+module app.utils {
+    export class ReactComponent<TProps, TState> extends ReactComponentBase<TProps, TState> {
+        render(): any {
+            console.error("Method render is not implemented in child class: ", this);
+        }
+    }
 } 

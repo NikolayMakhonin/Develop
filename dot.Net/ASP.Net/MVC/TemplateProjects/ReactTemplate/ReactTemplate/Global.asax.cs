@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AspNetUtils.Debug;
 
 namespace ReactTemplate
 {
@@ -13,11 +14,12 @@ namespace ReactTemplate
     {
         protected void Application_Start()
         {
+            DebugHelpers.InitDebugWindow();
             AreaRegistration.RegisterAllAreas();
-            ReactConfig.Configure();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //ReactConfig.Configure();
         }
     }
 }

@@ -1,17 +1,18 @@
 ///<reference path="../../../typings/react.d.ts"/>
+///<reference path="../../utils/ReactComponent.ts"/>
 ///<reference path="../components/TodoList.ts"/>
 ///<reference path="../components/TodoInput.ts"/>
 ///<reference path="../components/ItemsCounter.ts"/>
 ///<reference path="../components/ToggleAll.ts"/>
-///<reference path="../Flux.ts"/>
 
 module app.shared.handlers {
     import ReactComponent = app.utils.ReactComponent;
+    var FluxComponent = nodejs.react.flux.FluxComponent;
     var ToggleAll = app.shared.components.ToggleAll;
     var ItemsCounter = app.shared.components.ItemsCounter;
     var TodoList = app.shared.components.TodoList;
     var TodoInput = app.shared.components.TodoInput;
-    var Flux = app.shared.Flux;
+    var React = nodejs.react.React;
 
     export class TodoHandler extends ReactComponent<any, any> {
         static routerWillRun(args: {flux; state}) {
@@ -65,18 +66,18 @@ module app.shared.handlers {
                         <TodoInput handleNewTask={this.handleNewTask.bind(this)} />
                     </header>
                     <section className="main">
-                        <Flux connectToStores={['todo']}>
+                        <FluxComponent connectToStores={['todo']}>
                             <ToggleAll onToggleStatus={this.handleToggleAll.bind(this)} />
-                        </Flux>
-                        <Flux connectToStores={['todo']}>
+                        </FluxComponent>
+                        <FluxComponent connectToStores={['todo']}>
                             <TodoList onToggleStatus={this.handleToggleStatus.bind(this)}
                                       onDeleteTask={this.handleDeleteTask.bind(this)} />
-                        </Flux>
+                        </FluxComponent>
                     </section>
                     <footer className="footer">
-                        <Flux connectToStores={['todo']}>
+                        <FluxComponent connectToStores={['todo']}>
                             <ItemsCounter count={0} />
-                        </Flux>
+                        </FluxComponent>
                         <ul className="filters">
                             <li>
                                 <a href="/">All</a>

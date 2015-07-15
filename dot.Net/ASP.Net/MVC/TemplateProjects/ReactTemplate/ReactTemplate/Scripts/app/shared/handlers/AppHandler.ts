@@ -1,8 +1,10 @@
 ///<reference path="../../../typings/react.d.ts"/>
+///<reference path="../../utils/ReactComponent.ts"/>
 
 module app.shared.handlers {
     import ReactComponent = app.utils.ReactComponent;
     var RouteHandler = nodejs.react.Router.RouteHandler;
+    var React = nodejs.react.React;
 
     export class AppHandler extends ReactComponent<any, any> {
         render(): any {
